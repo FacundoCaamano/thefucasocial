@@ -10,11 +10,17 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { ListComponent } from './dashboard-component/components/navbar/list/list.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { HomeComponent } from './dashboard-component/pages/home/home.component';
+import { FriendsComponent } from './dashboard-component/pages/friends/friends.component';
+import { ProfileComponent } from './dashboard-component/pages/profile/profile.component';
 @NgModule({
   declarations: [
     DashboardComponent,
     NavbarComponent,
-    ListComponent
+    ListComponent,
+    HomeComponent,
+    FriendsComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
