@@ -1,0 +1,15 @@
+.app-list{
+    width: 100%;
+}
+.example-container{
+    height: 90vh;
+    position: absolute;
+    .example-sidenav{
+        width: 100vw;
+    }
+}
+@media screen and (max-width: 768px) {
+    .nav-menu{
+        opacity: 0;
+    }
+}

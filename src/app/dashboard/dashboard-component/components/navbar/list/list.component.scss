@@ -1,0 +1,14 @@
+.list-container{
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    width: 90%;
+}
+
+@media screen and (max-width:768px) {
+    .list-container{
+        display: flex;
+        flex-direction: column;
+        height: 50%;
+    }
+}

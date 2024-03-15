@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+    <button  *ngIf="width < 768px" (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>My App</span>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+        <mat-icon>share</mat-icon>
+    </button>
+    <div ngClass="nav-menu" *ngIf="width > 768px" class="app-list">
+        <app-list/>
+    </div>
+</mat-toolbar>
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer  #drawer class="example-sidenav" mode="side">
+        <p (click)="drawer.toggle()" >x</p>
+      <app-list/>
+    </mat-drawer>
+</mat-drawer-container>
+  
