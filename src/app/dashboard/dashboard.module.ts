@@ -13,6 +13,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { HomeComponent } from './dashboard-component/pages/home/home.component';
 import { FriendsComponent } from './dashboard-component/pages/friends/friends.component';
 import { ProfileComponent } from './dashboard-component/pages/profile/profile.component';
+import { PostsComponent } from './dashboard-component/pages/posts/posts.component';
+import { CardPostComponent } from './dashboard-component/pages/posts/components/card-post/card-post.component';
+import {MatCardModule} from '@angular/material/card'
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -20,7 +24,9 @@ import { ProfileComponent } from './dashboard-component/pages/profile/profile.co
     ListComponent,
     HomeComponent,
     FriendsComponent,
-    ProfileComponent
+    ProfileComponent,
+    PostsComponent,
+    CardPostComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +34,8 @@ import { ProfileComponent } from './dashboard-component/pages/profile/profile.co
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatCardModule
   ],
   exports:[
     DashboardComponent

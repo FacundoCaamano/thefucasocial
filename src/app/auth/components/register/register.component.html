@@ -1,1 +1,32 @@
-<p>register works!</p>
+<div class="register-container">
+    <form class="example-form" [formGroup]="formRegister">
+        <mat-form-field class="example-full-width">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" formControlName="name" >
+            <mat-error *ngIf="nameControl.invalid">error</mat-error>
+          </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email">
+          <mat-error *ngIf="emailControl.invalid">error</mat-error>
+        </mat-form-field>
+      
+        <mat-form-field class="example-full-width">
+            <mat-label >Password</mat-label>
+            <input matInput type="password" formControlName="password">
+            <mat-error *ngIf="passwordControl.invalid">error</mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput type="password" formControlName="confirmPassword">
+            <mat-error *ngIf="confirmPasswordControl.invalid">Las contrasenas deben ser iguales</mat-error>
+        </mat-form-field>
+          <div>
+            <button mat-raised-button color="primary" (click)="register()">Register</button>
+            <button mat-raised-button color="accent">Accent</button>
+          </div>
+      </form>
+
+      
+</div>
