@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateUser, User } from '../models/users';
 import { environment } from 'src/environments/environment.development';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, catchError, map, take, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, take, tap, throwError } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,10 @@ export class AuthService {
   private _authUser$ = new BehaviorSubject<any>(null)
   public  authUser$ = this._authUser$.asObservable()
   
-  constructor(private httpClient:HttpClient, private router:Router) {}
+  constructor(
+    private httpClient:HttpClient,
+    private router:Router,
+    ) {}
 
 
     registerUser(name:string,email:string,password:string){  
@@ -30,27 +34,43 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    this.httpClient.post<any>(this.url + 'login', { email, password })
-    .pipe(take(1))
-    .subscribe({
-      next:(data:any)=>{
-        const userData:any = jwtDecode(data)
-        this._authUser$.next(userData.token)
-        this.router.navigate(['dashboard/home'])
+    this.httpClient.post(this.url + 'login', {email, password}).subscribe(
+      {
+        next:(data)=>{
+        localStorage.setItem('token', data as string)
+         this._authUser$.next(data)
+        }
       }
-    })
+    )
 
   }
 
-  checkToken(){
-   const token = localStorage.getItem('token')
-   if(token){
-    const userData:any = jwtDecode(token)
-    this._authUser$.next(userData.token)
-   } 
+  authUser(){
+    const token = localStorage.getItem('token');
+    console.log(token);
+    
+    if(token){
+      const headers = new HttpHeaders({
+        'Authorization': token
+      });
+  
+        this.httpClient.post(this.url + 'auth-check', {}, {headers: headers}).subscribe({
+        next: (data) => {
+          console.log(data);
+        }
+      });
+    } else {
+      console.log('No hay token almacenado en el localStorage');
+    }
   }
+
+ 
 
   
 
-
+  logout() {
+    
+    this._authUser$.next(null);
+    this.router.navigate(['auth/login']);
+  } 
 }
