@@ -4,6 +4,8 @@ import { HomeComponent } from './dashboard-component/pages/home/home.component';
 import { ProfileComponent } from './dashboard-component/pages/profile/profile.component';
 import { FriendsComponent } from './dashboard-component/pages/friends/friends.component';
 import { PostsComponent } from './dashboard-component/pages/posts/posts.component';
+//import { authGuard } from '../core/auth.guard';
+
 
 const routes: Routes = [
   {
@@ -16,6 +18,7 @@ const routes: Routes = [
   },
   {
     path:'profile',
+    //canActivate:[authGuard],
     component:ProfileComponent
   },
   {

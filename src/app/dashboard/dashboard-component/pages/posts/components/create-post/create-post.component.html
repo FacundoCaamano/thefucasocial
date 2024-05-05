@@ -1,0 +1,7 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Escribe tu post" rows="5" [(ngModel)]="postContent" name="postContent"></textarea>
+      </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="button" (click)="publishPost()" >Publicar</button>
+  </form>

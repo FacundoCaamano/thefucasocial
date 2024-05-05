@@ -1,0 +1,15 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-create-post',
+  templateUrl: './create-post.component.html',
+  styleUrls: ['./create-post.component.scss']
+})
+export class CreatePostComponent {
+  postContent:string = ''
+
+  publishPost(){
+    console.log('Contenido del post:', this.postContent);
+    
+  }
+}

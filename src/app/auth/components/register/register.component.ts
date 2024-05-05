@@ -43,7 +43,8 @@ export class RegisterComponent {
           email:this.emailControl.value as string,
           password:this.passwordControl.value as string
         }
-        this.authService.registerUser(payload.name, payload.email, payload.password)
+        //this.authService.registerUser(payload.name, payload.email, payload.password)
+        this.authService.registerUserPassport(payload.name, payload.email, payload.password)
     }
   }
 }

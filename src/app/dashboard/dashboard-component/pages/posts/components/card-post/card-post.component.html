@@ -1,16 +1,23 @@
-<mat-card class="example-card" *ngFor="let post of posts | async">
+<div class="post-container">
+  <mat-card class="post-card example-card" *ngFor="let post of posts | async">
     <mat-card-header>
-      <mat-card-title>{{post.author}}</mat-card-title>
-      <mat-card-subtitle>{{post.createdAt}}</mat-card-subtitle>
+      <div class="post-header">
+        <mat-card-title>{{post.author.name}}</mat-card-title>
+        <mat-card-subtitle>{{post.createdAt | date:'medium'}}</mat-card-subtitle>
+      </div>
     </mat-card-header>
     <mat-card-content>
-      <p>{{post.content}}</p>
-
+      <p class="post-content">{{post.content}}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-button>LIKE</button>
-      <button mat-button>comment</button>
+      <button mat-icon-button aria-label="Like">
+        <mat-icon>thumb_up</mat-icon>
+      </button>
+      <span class="action-label">LIKE</span>
+      <button mat-icon-button aria-label="Comment">
+        <mat-icon>comment</mat-icon>
+      </button>
+      <span class="action-label">Comment</span>
     </mat-card-actions>
   </mat-card>
-
- 
+</div>

@@ -6,10 +6,12 @@ import { AuthService } from './auth/service/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent  {
+export class AppComponent implements OnInit  {
   title = 'theFucaSocial';
   constructor(private authService:AuthService){
-   this.authService.authUser()
+  }
+  ngOnInit(): void {
+    this.authService.authUser()
   }
 
 }

@@ -15,7 +15,13 @@ import { FriendsComponent } from './dashboard-component/pages/friends/friends.co
 import { ProfileComponent } from './dashboard-component/pages/profile/profile.component';
 import { PostsComponent } from './dashboard-component/pages/posts/posts.component';
 import { CardPostComponent } from './dashboard-component/pages/posts/components/card-post/card-post.component';
-import {MatCardModule} from '@angular/material/card'
+import {MatCardModule} from '@angular/material/card';
+import { CreatePostComponent } from './dashboard-component/pages/posts/components/create-post/create-post.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -26,7 +32,8 @@ import {MatCardModule} from '@angular/material/card'
     FriendsComponent,
     ProfileComponent,
     PostsComponent,
-    CardPostComponent
+    CardPostComponent,
+    CreatePostComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +42,10 @@ import {MatCardModule} from '@angular/material/card'
     MatIconModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatCardModule
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
+    FormsModule
   ],
   exports:[
     DashboardComponent
