@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PostsService } from '../../service/posts.service';
 import { AuthService } from 'src/app/auth/service/auth.service';
 import { Observable } from 'rxjs';
@@ -8,21 +8,17 @@ import { Observable } from 'rxjs';
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.scss']
 })
-export class CreatePostComponent {
+export class CreatePostComponent implements OnInit {
 
   postContent:string = ''
-  userId!:string
-  userName!:string
-  constructor(private postService:PostsService, private authservice:AuthService){
-     this.authservice.authUser$.subscribe(
-      data =>{
-        if(data){
-          this.userId = data?._id
-          this.userName = data?.name
-        }
-      }
-     )
+  @Input() userId!:string
+  @Input() userName!:string
+  constructor(private postService:PostsService){
+    
+  }
+  ngOnInit(): void {
 
+    
   }
   publishPost(){
     //console.log('id: ',this.userName);

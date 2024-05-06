@@ -3,5 +3,7 @@ export interface Post{
     content:string,
     authorId: string,
     authorName:string,
-    createdAt:Date
+    createdAt:Date,
+    likes:Array<string>,
+    dislikes:Array<string>
 }

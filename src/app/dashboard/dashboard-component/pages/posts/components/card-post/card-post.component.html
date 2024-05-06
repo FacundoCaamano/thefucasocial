@@ -3,17 +3,19 @@
     <mat-card-header>
       <div class="post-header">
         <mat-card-title>{{post.authorName}}</mat-card-title>
-        <mat-card-subtitle>{{post.createdAt | date:'medium'}}</mat-card-subtitle>
+        <mat-card-subtitle>{{post.createdAt | date:'short'}}</mat-card-subtitle>
       </div>
     </mat-card-header>
     <mat-card-content>
       <p class="post-content">{{post.content}}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-icon-button aria-label="Like">
-        <mat-icon>thumb_up</mat-icon>
+      <button *ngIf="!(userId == undefined)" mat-icon-button aria-label="Like" (click)="like(post._id)">
+        <mat-icon [ngClass]="{'liked': post.likes.includes(userId)}">thumb_up</mat-icon>
       </button>
-      <span class="action-label">LIKE</span>
+      <button *ngIf="!(userId == undefined)" mat-icon-button aria-label="disLike" (click)="dislike(post._id)">
+        <mat-icon [ngClass]="{'disliked': post.dislikes.includes(userId)}">thumb_down</mat-icon>
+      </button>
       <button mat-icon-button aria-label="Comment">
         <mat-icon>comment</mat-icon>
       </button>

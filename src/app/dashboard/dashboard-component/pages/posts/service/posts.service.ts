@@ -33,4 +33,36 @@ export class PostsService {
       }
     )
   }
+  likePost(postId:string, userId:string){
+    this.httpClient.post(this.url + 'like/' + postId + '/' + userId ,{}).subscribe({
+      next:()=>{
+        console.log('next');
+        
+      },
+      error:()=>{
+        console.log('error');
+        
+      },
+      complete:()=>{
+        console.log('complete');
+        
+      }
+    })
+  }
+  dislikePost(postId:string, userId:string){
+    this.httpClient.post(this.url + 'dislike/' + postId + '/' + userId ,{}).subscribe({
+      next:()=>{
+        console.log('next');
+        
+      },
+      error:()=>{
+        console.log('error');
+        
+      },
+      complete:()=>{
+        console.log('complete');
+        
+      }
+    })
+  }
 }
