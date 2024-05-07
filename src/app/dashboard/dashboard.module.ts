@@ -20,6 +20,9 @@ import { CreatePostComponent } from './dashboard-component/pages/posts/component
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { PostComponentComponent } from './dashboard-component/pages/profile/components/post-component/post-component.component';
+import { ProfileComponentComponent } from './dashboard-component/pages/profile/components/profile-component/profile-component.component';
+import { NavbarProfileComponent } from './dashboard-component/pages/profile/components/navbar-profile/navbar-profile.component';
 
 
 
@@ -34,6 +37,9 @@ import { FormsModule } from '@angular/forms';
     PostsComponent,
     CardPostComponent,
     CreatePostComponent,
+    PostComponentComponent,
+    ProfileComponentComponent,
+    NavbarProfileComponent,
   ],
   imports: [
     CommonModule,

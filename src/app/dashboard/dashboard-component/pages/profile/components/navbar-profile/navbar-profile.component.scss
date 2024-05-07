@@ -1,0 +1,16 @@
+.navbar-profile--container{
+    position: absolute;
+    margin: 0;
+    top: 9vh;
+    left: 30vw;
+    width: 40vw;
+    .navbar-profile{
+        font-size: 1rem;
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+    }
+}
+mat-toolbar{
+    border-radius: 10px;
+}

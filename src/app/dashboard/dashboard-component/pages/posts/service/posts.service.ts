@@ -11,6 +11,8 @@ export class PostsService {
 
   private url = environment.urlApi
 
+  
+
   constructor(private httpClient:HttpClient) { }
 
   getPosts():Observable<Post[]>{
@@ -64,5 +66,9 @@ export class PostsService {
         
       }
     })
+  }
+
+  deletePost(postId:string,userId:string){
+    this.httpClient.delete(this.url + 'delete-post/' + postId + '/' +userId).subscribe()
   }
 }

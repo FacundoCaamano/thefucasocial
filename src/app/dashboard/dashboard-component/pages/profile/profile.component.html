@@ -1,6 +1,4 @@
-<p>profile works!</p>
-<pre>
-    {{userdata | async | json}}
-</pre>
-<p>{{ (userdata | async)?.name }}</p>
-<button mat-button color="primary" (click)="logout()">Cerrar sesion</button>
+<app-navbar-profile/>
+<router-outlet/>
+
+

@@ -1,0 +1,25 @@
+.card-profile{
+    border: 1px solid black;
+    background-color: #673ab7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    color: rgb(171, 171, 171);
+    &--header{
+        width: 100%;
+    }
+    &--body{
+        width: 100%;
+        &__item{
+            border-bottom: 1px solid black;
+            display: block;
+            height: 60px;
+            padding: 10px;
+        }
+    }
+    &--footer{
+        width: 100%;
+    }
+}

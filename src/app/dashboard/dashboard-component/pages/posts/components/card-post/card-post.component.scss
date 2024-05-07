@@ -44,3 +44,11 @@
   .disliked {
     color: red; /* Cambia el color a rojo cuando está disliked */
   }
+
+  .mat-actions{
+    justify-content: space-between;
+  }
+
+  .deleteIcon{
+    color: red;
+  }
