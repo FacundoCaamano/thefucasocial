@@ -1,5 +1,5 @@
 <app-navbar/>
-<main class="menu">
+<main class="menu"  [ngClass]="{'darkmode': darkMode | async}">
     <div>
         <router-outlet/>
     </div>

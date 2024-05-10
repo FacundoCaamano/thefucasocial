@@ -1,23 +1,30 @@
 <mat-toolbar color="primary" class="navbar--container">
-    <button  *ngIf="width < 768px" (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-    </button>
-    <span>My App</span>
-    <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
-    </button>
+    <div>
+        <button  *ngIf="width < 768px" (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span>The-Fuca-Social</span>
+    </div>
+    <div class="btn-darkMode">
+        <mat-icon>nights_stay</mat-icon>
+        <mat-slide-toggle color="primary" (click)="toggleTheme()"></mat-slide-toggle>
+    </div>
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon>share</mat-icon>
     </button>
     <div ngClass="nav-menu" *ngIf="width > 768px" class="app-list">
         <app-list/>
     </div>
+    <div>
+        <span *ngIf="name" >{{name}}</span>
+        <button mat-raised-button color="accent"  *ngIf="!name" routerLink="/auth/login">Iniciar sesion</button>
+    </div>
+
 </mat-toolbar>
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer  #drawer class="example-sidenav" mode="side">
         <p (click)="drawer.toggle()" >x</p>
-      <app-list/>
+        <app-list/>
     </mat-drawer>
 </mat-drawer-container>
   

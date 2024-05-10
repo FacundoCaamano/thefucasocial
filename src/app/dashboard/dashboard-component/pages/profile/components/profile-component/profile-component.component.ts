@@ -2,7 +2,9 @@ import { Component, Input } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { User } from 'src/app/auth/models/users';
 import { AuthService } from 'src/app/auth/service/auth.service';
-import { ProfileServiceService } from '../../service/profile-service.service';
+import { PostsService } from '../../../home/components/posts/service/posts.service';
+import { Post } from '../../../home/components/posts/models';
+
 
 @Component({
   selector: 'app-profile-component',
@@ -14,15 +16,20 @@ export class ProfileComponentComponent {
   userdata!:Observable<User>
   userId!:string
   authUserSuscription!: Subscription
-  constructor(private authService:AuthService, private profileService:ProfileServiceService){
+  myPosts!:Observable<Post[]>
+  constructor(
+    private authService:AuthService,
+    private postService:PostsService,
+  ){
     this.authUserSuscription=this.authService.authUser$.subscribe(
       data => { this.userId=data?._id}
     )
+    
   }
   ngOnInit(): void {
-    this.userdata = this.authService.authUser$
-    //this.profileService.getProfile(this.userId)
-    
+    this.postService.getPostsById(this.userId)
+    this.userdata = this.authService.authUser$ 
+    this.myPosts = this.postService.posts$   
   }
   ngOnDestroy(): void {
     this.authUserSuscription.unsubscribe()
@@ -31,4 +38,6 @@ export class ProfileComponentComponent {
   logout(){
    this.authService.logout()
   }
+
+
 }

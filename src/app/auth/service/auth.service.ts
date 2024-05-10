@@ -17,14 +17,25 @@ export class AuthService {
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-    private cookieService: CookieService
   ) { }
 
   authUser() {
-    return this.httpClient.get<any>(`${this.url}userauth`,{withCredentials:true}).subscribe(
+   return this.httpClient.get<any>(`${this.url}userauth`,{withCredentials:true}).subscribe(
       {
         next:(data)=>{
           this._authUser$.next(data?.usuario)          
+        }
+      }
+    )
+  }
+  loginPassport(email: string, password: string) {
+    this.httpClient.post(this.url + 'login', { email, password }, { withCredentials: true }).subscribe(
+      {
+        next: (data:any) => {
+          this._authUser$.next(data);
+        
+          this.router.navigate(['dashboard/home'])
+
         }
       }
     )
@@ -40,18 +51,6 @@ export class AuthService {
       }
     })
 
-  }
-  loginPassport(email: string, password: string) {
-    this.httpClient.post(this.url + 'login', { email, password }, { withCredentials: true }).subscribe(
-      {
-        next: (data:any) => {
-          this._authUser$.next(data);
-        
-          this.router.navigate(['dashboard/home'])
-
-        }
-      }
-    )
   }
   
   logout() {

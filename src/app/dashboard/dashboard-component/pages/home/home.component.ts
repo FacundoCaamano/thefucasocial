@@ -8,9 +8,9 @@ import { AuthService } from 'src/app/auth/service/auth.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  user:Observable<string>
-constructor(private authService:AuthService){
-   
-   this.user = this.authService.authUser$
-}
+  user: Observable<string>
+
+  constructor(private authService: AuthService) {
+    this.user = this.authService.authUser$
+  }
 }
