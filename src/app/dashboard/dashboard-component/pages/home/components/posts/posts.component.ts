@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Post } from './models';
 import { AuthService } from 'src/app/auth/service/auth.service';
 import { PostsService } from './service/posts.service';
+import { ThemeService } from 'src/app/core/service/theme.service';
 
 @Component({
   selector: 'app-posts',
@@ -15,8 +16,10 @@ export class PostsComponent implements OnInit, OnDestroy {
   userId!:string
   userName!:string
   suscription!:Subscription
-  constructor(private authService:AuthService, private postService:PostsService){
+  darkMode!:Observable<boolean>
+  constructor(private authService:AuthService, private postService:PostsService, private themeService:ThemeService){
     this.postService.getPosts()
+    this.darkMode = this.themeService.darkMode
     this.suscription = this.authService.authUser$.subscribe(
        data => {
          this.userId = data?._id  

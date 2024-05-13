@@ -13,6 +13,7 @@ export class CreatePostComponent implements OnInit {
   postContent:string = ''
   @Input() userId!:string
   @Input() userName!:string
+  @Input() darkMode!:Observable<boolean>
   constructor(private postService:PostsService){
     
   }

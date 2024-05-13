@@ -19,7 +19,7 @@ const routes: Routes = [
     component:ProfileComponent,
     children:[
       {
-        path:'profile',
+        path:'',
         component:ProfileComponentComponent
       },{
         path:'posts',

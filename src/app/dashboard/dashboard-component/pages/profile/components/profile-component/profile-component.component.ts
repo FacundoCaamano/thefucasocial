@@ -22,12 +22,15 @@ export class ProfileComponentComponent {
     private postService:PostsService,
   ){
     this.authUserSuscription=this.authService.authUser$.subscribe(
-      data => { this.userId=data?._id}
+      data => {
+        if(data){
+          this.userId=data._id}
+          this.postService.getPostsById(data._id)
+        } 
     )
     
   }
   ngOnInit(): void {
-    this.postService.getPostsById(this.userId)
     this.userdata = this.authService.authUser$ 
     this.myPosts = this.postService.posts$   
   }

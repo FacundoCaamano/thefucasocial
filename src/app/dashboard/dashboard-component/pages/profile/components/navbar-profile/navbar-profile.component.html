@@ -1,14 +1,18 @@
 <p class="navbar-profile--container">
     <mat-toolbar color="primary">
         <mat-toolbar-row>
-            <ul class="navbar-profile">
-                <button mat-button routerLink="profile">
-                 Mi cuenta 
+            <div class="navbar-profile">
+                <button mat-button routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                  <span>
+                      Mi cuenta 
+                  </span>
                 </button>
-                <button mat-button routerLink="posts">
-                 Posteos 
+                <button mat-button routerLink="posts" routerLinkActive="active">
+                 <span>
+                     Posteos 
+                    </span>   
                 </button>
-            </ul>
+            </div>
       </mat-toolbar-row>
     </mat-toolbar>
   </p>

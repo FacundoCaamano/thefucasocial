@@ -20,17 +20,13 @@ export class PostsService {
 
   getPosts() {
     this.httpClient.get<Post[]>(this.url + 'posts').subscribe({
-      next: (data) => {
-        console.log(data);
-        
+      next: (data) => {   
         this._posts$.next(data)
       },
       error: (err) => {
         console.log(err);
       },
       complete: () => {
-        console.log('complete');
-
       }
     })
   }

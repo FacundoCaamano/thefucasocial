@@ -22,6 +22,7 @@ import { PostComponentComponent } from './dashboard-component/pages/profile/comp
 import { ProfileComponentComponent } from './dashboard-component/pages/profile/components/profile-component/profile-component.component';
 import { ProfileComponent } from './dashboard-component/pages/profile/profile.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { FooterComponent } from './dashboard-component/components/footer/footer.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ProfileComponent,
     ProfileComponentComponent,
     NavbarProfileComponent,
+    FooterComponent,
   ],
   imports: [
     CommonModule,

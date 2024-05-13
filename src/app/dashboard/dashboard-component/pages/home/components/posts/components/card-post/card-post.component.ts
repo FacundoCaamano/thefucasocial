@@ -3,6 +3,7 @@ import { Post } from '../../models';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/service/auth.service';
 import { PostsService } from '../../service/posts.service';
+import { ThemeService } from 'src/app/core/service/theme.service';
 
 @Component({
   selector: 'app-card-post',
@@ -12,6 +13,8 @@ import { PostsService } from '../../service/posts.service';
 export class CardPostComponent {
  @Input() posts!:Observable<Post[]>
  @Input() userId!: string 
+ @Input() darkMode!:Observable<boolean>
+ 
  constructor(private authService:AuthService,private postService:PostsService){
 }
 

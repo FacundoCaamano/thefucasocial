@@ -21,8 +21,10 @@ export class PostComponentComponent {
   ){
     this.authUserSuscription=this.authService.authUser$.subscribe(
       data => {
-         this.userId=data?._id
-         this.postService.getPostsById(this.userId)
+        if(data){
+         this.userId=data._id
+           this.postService.getPostsById(data._id)
+          }
       }
     )
     
