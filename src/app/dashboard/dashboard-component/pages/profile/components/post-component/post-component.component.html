@@ -1,1 +1,27 @@
-{{myPosts | async | json}}
+
+<mat-card *ngFor="let post of myPosts | async" >
+    <mat-card-header  [ngClass]="{ 'darkmode':darkMode | async}">
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ post.authorName }}</mat-card-title>
+      <mat-card-subtitle >
+        <span  [ngClass]="{ 'darkmode':darkMode | async}">
+            {{ post.createdAt | date: 'medium' }}
+        </span>
+    </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content  [ngClass]="{ 'darkmode':darkMode | async}">
+      <p>{{ post.content }}</p>
+    </mat-card-content>
+    <mat-card-actions   [ngClass]="{ 'darkmode':darkMode | async}">
+      <button mat-button >
+        <span  [ngClass]="{ 'darkmode':darkMode | async}">
+            Editar
+        </span>
+     </button>
+      <button mat-button>
+        <span  [ngClass]="{ 'darkmode':darkMode | async}" (click)="deletePost(post._id)">
+            Borrar
+        </span>
+    </button>
+    </mat-card-actions>
+  </mat-card>

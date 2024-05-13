@@ -124,7 +124,16 @@ export class PostsService {
   }
 
   deletePost(postId: string, userId: string) {
-    this.httpClient.delete(this.url + 'delete-post/' + postId + '/' + userId).subscribe()
+    this.httpClient.delete(this.url + 'delete-post/' + postId + '/' + userId)
+    .pipe(mergeMap((responsePostDelete)=> this._posts$.pipe(
+      take(1),
+      map((arrayActual)=> arrayActual.filter(p => p._id !== postId))
+    )))
+    .subscribe({
+      next:(posts)=>{
+        this._posts$.next(posts)
+      }
+    })
   }
 
   getPostsById(id:string){

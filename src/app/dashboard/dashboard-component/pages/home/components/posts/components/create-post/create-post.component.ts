@@ -22,7 +22,6 @@ export class CreatePostComponent implements OnInit {
     
   }
   publishPost(){
-    //console.log('id: ',this.userName);
     
    this.postService.createPost(this.userId,this.postContent, this.userName)
     
