@@ -1,7 +1,9 @@
-<form class="example-form" [ngClass]="{'darkmode' : darkMode | async}">
-    <mat-form-field class="example-full-width" >
-        <textarea  matInput placeholder="Escribe tu post"  [(ngModel)]="postContent" name="postContent"></textarea>
-      </mat-form-field>  
-      <button mat-raised-button color="primary" type="button" (click)="publishPost()" >Publicar</button>
+<form class="example-form" >
+    <div class="example-full-width" >
+        <textarea  matInput placeholder="Escribe tu post"  [(ngModel)]="postContent" name="postContent" class="custom-textarea " [ngClass]="{'darkmode' : darkMode | async}"></textarea>
+    </div>  
+    <div *ngIf="(loader | async)" class="loader--container">
+        <span class="loader"></span>
+    </div>
+      <button   mat-raised-button color="primary" type="button" (click)="publishPost()" [attr.disabled]="!(loader | async) ? null : true">Publicar</button>
   </form>
-

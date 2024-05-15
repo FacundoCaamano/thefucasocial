@@ -4,19 +4,32 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/service/auth.service';
 import { PostsService } from '../../service/posts.service';
 import { ThemeService } from 'src/app/core/service/theme.service';
+import { LoaderService } from 'src/app/core/service/loader.service';
 
 @Component({
   selector: 'app-card-post',
   templateUrl: './card-post.component.html',
   styleUrls: ['./card-post.component.scss']
 })
-export class CardPostComponent {
+export class CardPostComponent implements OnInit{
  @Input() posts!:Observable<Post[]>
  @Input() userId!: string 
  @Input() darkMode!:Observable<boolean>
  
- constructor(private authService:AuthService,private postService:PostsService){
-}
+  loader!:Observable<boolean>
+
+ constructor(
+  private authService:AuthService,
+  private postService:PostsService, 
+  private loaderService:LoaderService){
+
+  }
+
+  
+  ngOnInit(): void {
+    this.loader = this.loaderService.loader$
+  }
+
 
 
 like(postId:string){

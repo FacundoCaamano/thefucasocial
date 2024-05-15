@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, mergeMap, take } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, map, mergeMap, take } from 'rxjs';
 import { Post } from '../models';
 import { environment } from 'src/environments/environment.development';
+import { LoaderService } from 'src/app/core/service/loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,28 +12,35 @@ export class PostsService {
 
   private url = environment.urlApi
 
+  private _postPublished$ = new Subject<string>();
+  public postPublished$ = this._postPublished$.asObservable();
+  
   private _posts$ = new BehaviorSubject<Post[]>([])
   public posts$ = this._posts$.asObservable()
 
 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private loaderService:LoaderService) { }
 
   getPosts() {
-    this.httpClient.get<Post[]>(this.url + 'posts').subscribe({
+    this.loaderService.setLoader(true)
+    this.httpClient.get<Post[]>(this.url + 'posts').subscribe(
+      {
       next: (data) => {   
         this._posts$.next(data)
       },
       error: (err) => {
-        console.log(err);
+        this.loaderService.setLoader(false)
       },
       complete: () => {
+        this.loaderService.setLoader(false)
       }
     })
   }
 
-  createPost(_id: string, content: string, authorName: string) {
-    this.httpClient.post(this.url + '/create-post/' + _id, { content, authorName })
+  createPost(_id: string, content: string, authorName: string){
+    this.loaderService.setLoader(true)
+    this.httpClient.post(this.url + '/create-post/' + _id, { content, authorName },{withCredentials:true})
       .pipe(
         mergeMap((posts) => this._posts$.pipe(take(1),
         map(
@@ -43,18 +51,18 @@ export class PostsService {
         {
           next: (data) => {
             console.log(data);
-            
             this._posts$.next(data as Post[])
+            this._postPublished$.next('')
           },
           error: (error) => {
+            this.loaderService.setLoader(false)
             console.log('error al publicar', error);
           },
           complete: () => {
-            console.log('complete');
-
+              this.loaderService.setLoader(false)
           }
         }
-      )
+      )    
   }
   likePost(postId: string, userId: string) {
     this.httpClient.post(this.url + 'like/' + postId + '/' + userId, {})
@@ -124,7 +132,7 @@ export class PostsService {
   }
 
   deletePost(postId: string, userId: string) {
-    this.httpClient.delete(this.url + 'delete-post/' + postId + '/' + userId)
+    this.httpClient.delete(this.url + 'delete-post/' + postId + '/' + userId,{withCredentials:true})
     .pipe(mergeMap((responsePostDelete)=> this._posts$.pipe(
       take(1),
       map((arrayActual)=> arrayActual.filter(p => p._id !== postId))
@@ -132,6 +140,10 @@ export class PostsService {
     .subscribe({
       next:(posts)=>{
         this._posts$.next(posts)
+      },
+      error:(data)=>{
+        console.log(data);
+        
       }
     })
   }
