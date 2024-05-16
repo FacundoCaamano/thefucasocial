@@ -5,5 +5,6 @@ export interface Post{
     authorName:string,
     createdAt:Date,
     likes:Array<string>,
-    dislikes:Array<string>
+    dislikes:Array<string>,
+    edit:boolean
 }

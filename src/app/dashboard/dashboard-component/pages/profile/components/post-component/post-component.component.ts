@@ -17,6 +17,8 @@ export class PostComponentComponent {
   authUserSuscription!: Subscription
   myPosts!:Observable<Post[]>
   darkMode!:Observable<boolean>
+  postIdEdit!:string | null
+  originalContent!:string
   constructor(
     private authService:AuthService,
     private postService:PostsService,
@@ -44,5 +46,19 @@ export class PostComponentComponent {
   }
   ngOnDestroy(): void {
     this.authUserSuscription.unsubscribe()
+  }
+
+  onEdit(postId:string, postContent:string){
+    this.postIdEdit = postId
+    this.originalContent = postContent
+  }
+  save(postId:string,postContent:string){ 
+    this.postService.editPost(postId,this.userId, postContent)
+    this.postIdEdit = null
+
+  }
+  cancel(post:Post){
+    post.content = this.originalContent
+    this.postIdEdit = null
   }
 }

@@ -1,27 +1,41 @@
-
-<mat-card *ngFor="let post of myPosts | async" >
-    <mat-card-header  [ngClass]="{ 'darkmode':darkMode | async}">
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>{{ post.authorName }}</mat-card-title>
-      <mat-card-subtitle >
-        <span  [ngClass]="{ 'darkmode':darkMode | async}">
-            {{ post.createdAt | date: 'medium' }}
-        </span>
+<mat-card *ngFor="let post of myPosts | async">
+  <mat-card-header [ngClass]="{ 'darkmode':darkMode | async}">
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ post.authorName }}</mat-card-title>
+    <mat-card-subtitle>
+      <span [ngClass]="{ 'darkmode':darkMode | async}">
+        {{ post.createdAt | date: 'medium' }}
+      </span>
     </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content  [ngClass]="{ 'darkmode':darkMode | async}">
-      <p>{{ post.content }}</p>
-    </mat-card-content>
-    <mat-card-actions   [ngClass]="{ 'darkmode':darkMode | async}">
-      <button mat-button >
-        <span  [ngClass]="{ 'darkmode':darkMode | async}">
-            Editar
-        </span>
-     </button>
-      <button mat-button>
-        <span  [ngClass]="{ 'darkmode':darkMode | async}" (click)="deletePost(post._id)">
-            Borrar
-        </span>
+  </mat-card-header>
+  <mat-card-content [ngClass]="{ 'darkmode':darkMode | async}">
+    <ng-container *ngIf="postIdEdit == post._id ; else displayContent">
+      <input  type="text"  [(ngModel)]="post.content" class="inputEdit">
+    </ng-container>
+    <ng-template #displayContent>
+      {{ post.content }}
+    </ng-template>
+  </mat-card-content>
+  <mat-card-actions [ngClass]="{ 'darkmode':darkMode | async}">
+    <button mat-button>
+      <span [ngClass]="{ 'darkmode':darkMode | async}" (click)="onEdit(post._id,post.content)">
+        Editar
+      </span>
     </button>
-    </mat-card-actions>
-  </mat-card>
+    <button mat-button *ngIf="postIdEdit === post._id">
+      <span [ngClass]="{ 'darkmode':darkMode | async}" (click)="save(post._id,post.content)">
+        Guardar
+      </span>
+    </button>
+    <button mat-button *ngIf="postIdEdit === post._id">
+      <span [ngClass]="{ 'darkmode':darkMode | async}" (click)="cancel(post)">
+        Cancelar
+      </span>
+      </button>
+    <button mat-button>
+      <span [ngClass]="{'darkmode':darkMode | async}" (click)="deletePost(post._id)" >
+        Borrar
+      </span>
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -157,4 +157,8 @@ export class PostsService {
       }
     )
   }
+
+  editPost(postId:string, userId:string,content:string){
+    this.httpClient.put(this.url + 'edit-post/'+ postId + '/' + userId,{content},{withCredentials:true}).subscribe()
+  }
 }

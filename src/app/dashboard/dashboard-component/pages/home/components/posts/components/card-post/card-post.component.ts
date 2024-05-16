@@ -15,7 +15,8 @@ export class CardPostComponent implements OnInit{
  @Input() posts!:Observable<Post[]>
  @Input() userId!: string 
  @Input() darkMode!:Observable<boolean>
- 
+ editingPost!:string | null
+ originalContent!:string
   loader!:Observable<boolean>
 
  constructor(
@@ -41,5 +42,18 @@ like(postId:string){
  onDelete(postId:string){
   console.log('post eliminado , id:', postId,this.userId );
   this.postService.deletePost(postId,this.userId)
+ }
+ onEdit(postId:string, postContent:string){
+  this.editingPost = postId
+  this.originalContent = postContent
+}
+
+save(postId:string,postContent:string){
+   this.postService.editPost(postId,this.userId,postContent)
+   this.editingPost = null
+ }
+ cancel(post:Post){
+  post.content = this.originalContent
+  this.editingPost = null
  }
 }

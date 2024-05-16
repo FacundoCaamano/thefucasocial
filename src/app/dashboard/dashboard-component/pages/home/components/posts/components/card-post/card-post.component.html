@@ -6,6 +6,7 @@
         <div class="post-header">
           <mat-card-title>{{post.authorName}}</mat-card-title>
           <mat-card-subtitle>
+            <span *ngIf="post.edit" [ngClass]="{'darkmode':darkMode | async}">Editado</span>
             <span [ngClass]="{'darkmode':darkMode | async}">
               {{post.createdAt | date:'short'}}
             </span>
@@ -13,7 +14,12 @@
         </div>
       </mat-card-header>
       <mat-card-content [ngClass]="{'darkmode':darkMode | async}" >
-        <p class="post-content">{{post.content}}</p>
+        <ng-container *ngIf="editingPost == post._id; else displayContent">
+          <input type="text" [(ngModel)]="post.content" class="inputEdit">
+        </ng-container>
+        <ng-template #displayContent>
+          <p class="post-content">{{post.content}}</p>
+        </ng-template>
       </mat-card-content>
       <mat-card-actions class="mat-actions" [ngClass]="{'darkmode':darkMode | async}" >
         <div>
@@ -30,9 +36,21 @@
           </button>
           <span class="action-label">Comment</span>
         </div>
-        <button *ngIf="post.authorId == userId" mat-button (click)="onDelete(post._id)">
-          <mat-icon class="deleteIcon">delete</mat-icon>
-        </button>
+        <div>
+
+          <button *ngIf="post.authorId == userId" mat-button (click)="onDelete(post._id)">
+            <mat-icon class="deleteIcon">delete</mat-icon>
+          </button>
+          <button *ngIf="post.authorId == userId" mat-button (click)="onEdit(post._id,post.content)">
+            <mat-icon class="deleteIcon">edit</mat-icon>
+          </button>
+          <button *ngIf="editingPost == post._id" (click)="save(post._id,post.content)" mat-button color="accent">
+            Guardar
+          </button>
+          <button *ngIf="editingPost == post._id" (click)="cancel(post)" mat-button color="accent">
+            Cancelar
+          </button>
+        </div>
       </mat-card-actions>
     </mat-card>
   </div>

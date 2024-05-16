@@ -2,8 +2,8 @@
 <div class="login-container">
     <form class="example-form" [formGroup]="formLogin">
         <mat-form-field class="example-full-width">
-          <mat-label>Email</mat-label>
-          <input formControlName="email" matInput type="email" >
+          <mat-label class="label-login">Email</mat-label>
+          <input class="input-login" formControlName="email" matInput type="email" >
           <mat-error *ngIf="emailControl.invalid">
             email incorrecto
           </mat-error>
@@ -16,6 +16,6 @@
           <mat-error *ngIf="passControl.invalid">
             Contraseña invalida
           </mat-error>
-          <button (click)="login()">login</button>
+          <button mat-raised-button color="accent" (click)="login()">Login</button>
         </form>
       </div>

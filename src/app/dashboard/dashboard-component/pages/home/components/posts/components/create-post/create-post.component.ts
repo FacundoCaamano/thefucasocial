@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { PostsService } from '../../service/posts.service';
 import { AuthService } from 'src/app/auth/service/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/core/service/loader.service';
 
 @Component({
@@ -9,21 +9,29 @@ import { LoaderService } from 'src/app/core/service/loader.service';
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.scss']
 })
-export class CreatePostComponent implements OnInit {
+export class CreatePostComponent implements OnInit, OnDestroy {
 
-  postContent:string = ''
-  loader!:Observable<boolean>
-  @Input() userId!:string
-  @Input() userName!:string
-  @Input() darkMode!:Observable<boolean>
-  constructor(private postService:PostsService, private loaderService:LoaderService){
-    
+  postContent: string = ''
+  loader!: Observable<boolean>
+  subscription!: Subscription
+  @Input() userId!: string
+  @Input() userName!: string
+  @Input() darkMode!: Observable<boolean>
+  constructor(
+    private postService: PostsService,
+    private loaderService: LoaderService) {
   }
+
   ngOnInit(): void {
     this.loader = this.loaderService.loader$
-    this.postService.postPublished$.subscribe((data)=>this.postContent = data)
+    this.subscription = this.postService.postPublished$.subscribe((data) => this.postContent = data)
   }
-  publishPost(){
-   this.postService.createPost(this.userId,this.postContent, this.userName)
-}
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe()
+  }
+
+  publishPost() {
+    this.postService.createPost(this.userId, this.postContent, this.userName)
+  }
 }
