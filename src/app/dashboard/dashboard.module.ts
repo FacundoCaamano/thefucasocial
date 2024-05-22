@@ -23,6 +23,10 @@ import { ProfileComponentComponent } from './dashboard-component/pages/profile/c
 import { ProfileComponent } from './dashboard-component/pages/profile/profile.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FooterComponent } from './dashboard-component/components/footer/footer.component';
+import { FriendsListComponent } from './dashboard-component/pages/friends/components/friends-list/friends-list.component';
+import { FriendsRequestComponent } from './dashboard-component/pages/friends/components/friends-request/friends-request.component';
+import { NavbarFriendsComponent } from './dashboard-component/pages/friends/components/navbar-friends/navbar-friends.component';
+import { SearchComponent } from './dashboard-component/pages/friends/components/search/search.component';
 
 
 @NgModule({
@@ -40,6 +44,10 @@ import { FooterComponent } from './dashboard-component/components/footer/footer.
     ProfileComponentComponent,
     NavbarProfileComponent,
     FooterComponent,
+    FriendsListComponent,
+    FriendsRequestComponent,
+    NavbarFriendsComponent,
+    SearchComponent,
   ],
   imports: [
     CommonModule,

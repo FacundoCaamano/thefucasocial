@@ -1,0 +1,12 @@
+<aside>
+    <h3>Buscar nuevos amigos</h3>
+    <input [(ngModel)]="query" (input)="onSearch()">
+    <ul class="search--friends">
+        <li class="search--friends__element" *ngFor="let friend of searchFriends | async">
+           <span >
+               {{friend.name}}
+           </span> 
+           <button mat-button color="accent" (click)="sendRequest(friend._id)">Agregar amigo</button>
+        </li>
+    </ul>
+</aside>

@@ -1,0 +1,15 @@
+<div >
+    <mat-card *ngFor="let friendRequest of friendsRequests | async" class="custom-card">
+      <mat-card-header class="custom-header" style="border-radius: 10px;">
+        <mat-card-title class="custom-title"><span>{{friendRequest.name}}</span> te a enviado una solicitud</mat-card-title>
+        <mat-card-subtitle class="custom-subtitle">{{friendRequest.email}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions >
+        <button mat-raised-button color="accent" style="margin: 5px;" (click)="accept(friendRequest._id)">Aceptar</button>
+        <button mat-raised-button color="warn" style="margin: 5px;" (click)="reject(friendRequest._id)">Rechazar</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div *ngIf="!(friendsRequests | async).length">
+      <p>no se encontraron solicitudes :c</p>
+  </div>

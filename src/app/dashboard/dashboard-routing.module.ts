@@ -5,6 +5,8 @@ import { ProfileComponent } from './dashboard-component/pages/profile/profile.co
 import { FriendsComponent } from './dashboard-component/pages/friends/friends.component';
 import { ProfileComponentComponent } from './dashboard-component/pages/profile/components/profile-component/profile-component.component';
 import { PostComponentComponent } from './dashboard-component/pages/profile/components/post-component/post-component.component';
+import { FriendsListComponent } from './dashboard-component/pages/friends/components/friends-list/friends-list.component';
+import { FriendsRequestComponent } from './dashboard-component/pages/friends/components/friends-request/friends-request.component';
 
 //import { authGuard } from '../core/auth.guard';
 
@@ -29,7 +31,17 @@ const routes: Routes = [
   },
   {
     path:'friends',
-    component:FriendsComponent
+    component:FriendsComponent,
+    children:[
+      {
+        path: 'list',
+        component:FriendsListComponent
+      },
+      {
+        path:'request',
+        component: FriendsRequestComponent
+      }
+    ]
   }
 ];
 

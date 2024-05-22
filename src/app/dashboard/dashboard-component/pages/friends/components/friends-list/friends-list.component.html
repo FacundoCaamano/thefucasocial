@@ -1,0 +1,9 @@
+<section class="friendsList">
+        <mat-card *ngFor="let friends of friendsList$ | async" class="custom-card">
+            <mat-card-header class="custom-header" style="border-radius: 10px;">
+                <mat-card-title class="custom-title">{{friends.name}}</mat-card-title>
+                <mat-card-subtitle class="custom-subtitle">{{friends.email}}</mat-card-subtitle>
+            </mat-card-header>
+        </mat-card>
+    
+</section>

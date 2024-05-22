@@ -159,6 +159,31 @@ export class PostsService {
   }
 
   editPost(postId:string, userId:string,content:string){
-    this.httpClient.put(this.url + 'edit-post/'+ postId + '/' + userId,{content},{withCredentials:true}).subscribe()
+    this.loaderService.setLoader(true);
+    this.httpClient.put(this.url + 'edit-post/'+ postId + '/' + userId,{content},{withCredentials:true})
+    .pipe(mergeMap(() => this._posts$.pipe(
+      take(1),
+      map(posts => {
+        return posts.map(post => {
+          if(post._id === postId){
+            return {...post, content, edit:true}
+          }else{
+            return post
+          }
+        })
+      })
+    )))
+    .subscribe({
+      next:(updatedPost)=>{
+        this._posts$.next(updatedPost);
+      },
+      error:(err)=>{
+        console.log(err);
+      },
+      complete:()=>{
+        console.log('edit completado');
+        this.loaderService.setLoader(false)
+      }
+    })
   }
 }
