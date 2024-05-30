@@ -5,10 +5,16 @@
     width: 100%;
 }
 .example-container{
-    height: 90vh;
-    position: absolute;
+    height: 100vh;
+    top: 0px;
+    position: fixed;
+    z-index: 1100;
     .example-sidenav{
-        width: 100vw;
+        background-color: var(--color1);
+        width: 80vw;
+        button{
+            margin: 20px;
+        }
     }
 }
 .btn-darkMode{

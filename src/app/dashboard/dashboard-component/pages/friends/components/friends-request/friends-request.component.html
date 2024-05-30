@@ -10,6 +10,6 @@
       </mat-card-actions>
     </mat-card>
   </div>
-  <div *ngIf="!(friendsRequests | async).length">
+  <div *ngIf="!(friendsRequests | async)?.length">
       <p>no se encontraron solicitudes :c</p>
   </div>

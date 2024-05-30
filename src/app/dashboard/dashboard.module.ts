@@ -27,8 +27,11 @@ import { FriendsListComponent } from './dashboard-component/pages/friends/compon
 import { FriendsRequestComponent } from './dashboard-component/pages/friends/components/friends-request/friends-request.component';
 import { NavbarFriendsComponent } from './dashboard-component/pages/friends/components/navbar-friends/navbar-friends.component';
 import { SearchComponent } from './dashboard-component/pages/friends/components/search/search.component';
-
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRippleModule} from '@angular/material/core';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogFriendsOptionsComponent } from './dashboard-component/pages/friends/components/dialog-friends-options/dialog-friends-options.component'
+import {MatExpansionModule} from '@angular/material/expansion';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -48,6 +51,7 @@ import { SearchComponent } from './dashboard-component/pages/friends/components/
     FriendsRequestComponent,
     NavbarFriendsComponent,
     SearchComponent,
+    DialogFriendsOptionsComponent,
   ],
   imports: [
     CommonModule,
@@ -60,7 +64,11 @@ import { SearchComponent } from './dashboard-component/pages/friends/components/
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatCheckboxModule,
+    MatRippleModule,
+    MatDialogModule,
+    MatExpansionModule
   ],
   exports:[
     DashboardComponent

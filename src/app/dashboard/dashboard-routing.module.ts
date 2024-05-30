@@ -8,7 +8,6 @@ import { PostComponentComponent } from './dashboard-component/pages/profile/comp
 import { FriendsListComponent } from './dashboard-component/pages/friends/components/friends-list/friends-list.component';
 import { FriendsRequestComponent } from './dashboard-component/pages/friends/components/friends-request/friends-request.component';
 
-//import { authGuard } from '../core/auth.guard';
 
 
 const routes: Routes = [

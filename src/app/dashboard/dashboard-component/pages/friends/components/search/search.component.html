@@ -1,4 +1,4 @@
-<aside>
+<div>
     <h3>Buscar nuevos amigos</h3>
     <input [(ngModel)]="query" (input)="onSearch()">
     <ul class="search--friends">
@@ -6,7 +6,7 @@
            <span >
                {{friend.name}}
            </span> 
-           <button mat-button color="accent" (click)="sendRequest(friend._id)">Agregar amigo</button>
+           <button [disabled]="isFriend(friend._id)" mat-raised-button color="accent" (click)="sendRequest(friend._id)">Agregar amigo</button>
         </li>
     </ul>
-</aside>
+</div>

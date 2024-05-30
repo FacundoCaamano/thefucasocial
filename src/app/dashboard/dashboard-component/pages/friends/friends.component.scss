@@ -1,0 +1,22 @@
+.friends-pages{
+    margin: 15vh 0;
+}
+
+.friends--search__container{
+    position: absolute;
+    width: 20vw;
+    left: 20px;
+    z-index: 50;
+}
+
+@media (max-width:1200px){
+    .friends--search__container{
+        left: 20vw;
+        margin-top: 10vw;
+        width: 20vw;
+    }
+    .friends-pages{
+        margin: 30vh 0;
+    }
+    
+}

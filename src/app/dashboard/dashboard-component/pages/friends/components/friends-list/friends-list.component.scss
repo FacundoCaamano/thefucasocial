@@ -1,18 +1,74 @@
-
 .custom-card {
-    background-color: var(--color1);
-    margin: 10px
+  background-color: var(--color1);
+  margin: 10px
 }
 
 .custom-header {
-    padding: 10px;
-    background-color: var(--color1);
+  padding: 10px;
+  background-color: var(--color1);
+}
+
+.custom-title {
+  color: #ffffff;
+}
+
+.custom-subtitle {
+  color: #ffffff;
+}
+
+.mat-card-actions {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.panel-content{
+  color: white;
+  cursor: pointer;
+  p{
+    padding: 5px;
+    border: 1px solid white;
+    border-radius: 7px;
   }
-  
-  .custom-title {
-    color: #ffffff;
-  }
-  
-  .custom-subtitle {
-    color: #ffffff;
-  }
+}
+
+
+
+.mat-accordion {
+  margin: 15px;
+}
+
+mat-expansion-panel-header {
+  background-color: var(--color1);
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  width: 150px;
+}
+.button-options{
+  width: 150px;
+  height: 100%;
+}
+mat-expansion-panel {
+  width: 100%;
+  padding: 0;
+}
+
+::ng-deep .mat-expansion-panel:hover {
+  background-color: var(--color1); /* O el color que desees */
+}
+
+.mat-expansion-panel {
+  background-color: var(--color1);
+}
+
+.tune-button {
+  margin: 0;
+}
+
+::ng-deep .mat-content.mat-content-hide-toggle {
+  margin: 0 -3px 0 0 !important;
+}

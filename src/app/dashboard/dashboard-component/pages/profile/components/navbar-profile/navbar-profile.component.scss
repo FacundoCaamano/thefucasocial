@@ -20,3 +20,10 @@ mat-toolbar{
         color: yellow;
     }
 }
+
+@media (max-width:800px){
+    .navbar-profile--container{
+        left: 5vw;
+        width: 90vw;
+    }
+}

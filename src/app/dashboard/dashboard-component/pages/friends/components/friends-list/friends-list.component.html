@@ -1,9 +1,44 @@
 <section class="friendsList">
-        <mat-card *ngFor="let friends of friendsList$ | async" class="custom-card">
-            <mat-card-header class="custom-header" style="border-radius: 10px;">
-                <mat-card-title class="custom-title">{{friends.name}}</mat-card-title>
-                <mat-card-subtitle class="custom-subtitle">{{friends.email}}</mat-card-subtitle>
-            </mat-card-header>
-        </mat-card>
-    
+    <mat-card *ngFor="let friends of friendsList$ | async" class="custom-card">
+        <mat-card-header class="custom-header" style="border-radius: 10px;">
+            <mat-card-title class="custom-title">
+                {{friends.name}}
+            </mat-card-title>
+            <mat-card-subtitle class="custom-subtitle">
+                <span>
+                    {{friends.email}}
+                </span>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions class="mat-card-actions">
+           
+            <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" hideToggle>
+                  <mat-expansion-panel-header>
+                    
+                      <button mat-button color="accent" class="button-options">
+                        <mat-icon class="tune-button">
+                          tune
+                        </mat-icon>
+                      </button>
+                  
+                  </mat-expansion-panel-header>
+                  <div class="panel-content">
+                    <p>Enviar mensaje</p>
+                    <p (click)="onDeleteFriend(friends._id)">Eliminar amigo</p>
+                  </div>
+                </mat-expansion-panel>
+              </mat-accordion>
+            <!-- <div matRipple [matRippleUnbounded]="unboded" [matRippleCentered]="center">
+                <button mat-button color="accent" (click)="openDialog()">
+                    <mat-icon>
+                        tune
+                    </mat-icon>
+                </button>
+            </div> -->
+
+
+        </mat-card-actions>
+    </mat-card>
+
 </section>

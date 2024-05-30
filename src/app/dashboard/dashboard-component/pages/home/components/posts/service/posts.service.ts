@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject, map, mergeMap, take } from 'rxjs'
 import { Post } from '../models';
 import { environment } from 'src/environments/environment.development';
 import { LoaderService } from 'src/app/core/service/loader.service';
+import { User } from 'src/app/auth/models/users';
 
 @Injectable({
   providedIn: 'root'
@@ -65,25 +66,22 @@ export class PostsService {
       )    
   }
   likePost(postId: string, userId: string) {
-    this.httpClient.post(this.url + 'like/' + postId + '/' + userId, {})
+    this.httpClient.post<Post>(this.url + 'like/' + postId + '/' + userId, {})
     .pipe(
-      mergeMap(() => this._posts$.pipe(take(1),
-        map(posts =>{
+      mergeMap((updatedPost) => this._posts$.pipe(take(1),
+         map(posts =>{
           return posts.map(post =>{
-            if(post._id === postId){
-              const dislikes = post.dislikes.filter(dislikeId => dislikeId !== userId);
-              return { ...post, likes: [...post.likes, userId], dislikes };
-            }else{
-              return post
+            if (post._id === postId) {
+              return updatedPost; // Usar el post actualizado desde el backend
+            } else {
+              return post;
             }
           })
         })
       ))
     )
     .subscribe({
-      next: (updatedPost) => {
-        console.log(updatedPost);
-        
+      next: (updatedPost) => {    
         this._posts$.next(updatedPost)
 
       },
@@ -98,14 +96,13 @@ export class PostsService {
     })
   }
   dislikePost(postId: string, userId: string) {
-    this.httpClient.post(this.url + 'dislike/' + postId + '/' + userId, {})
+    this.httpClient.post<Post>(this.url + 'dislike/' + postId + '/' + userId, {})
     .pipe(
-      mergeMap(() => this._posts$.pipe(take(1),
+      mergeMap((updatedPost) => this._posts$.pipe(take(1),
         map(posts =>{
           return posts.map(post =>{
             if(post._id === postId){ 
-              const likes = post.likes.filter(likes => likes !== userId)
-              return {...post, dislikes:[...post.dislikes, userId],likes}
+              return updatedPost
             }else{
               return post
             }
@@ -115,14 +112,10 @@ export class PostsService {
     )
     .subscribe({
       next: (updatedPost) => {
-        console.log(updatedPost);
-        
         this._posts$.next(updatedPost)
-
       },
       error: () => {
         console.log('error');
-
       },
       complete: () => {
         console.log('complete');

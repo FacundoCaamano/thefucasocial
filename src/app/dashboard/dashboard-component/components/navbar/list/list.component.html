@@ -1,5 +1,17 @@
 <ul class="list-container">
-    <li routerLink="home" routerLinkActive="active">Inicio</li>
-    <li routerLink="profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">Perfil</li>
-    <li routerLink="friends/list" routerLinkActive="active">Amigos</li>
+    <li routerLink="home">
+    <button mat-raised-button color="primary" routerLinkActive="active">
+        Inicio
+    </button>
+    </li>
+    <li routerLink="profile">
+    <button mat-raised-button color="primary" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+        Perfil
+    </button>
+    </li>
+    <li routerLink="friends/list" >
+    <button mat-raised-button color="primary"  routerLinkActive="active">
+        Amigos
+    </button>
+    </li>
 </ul>

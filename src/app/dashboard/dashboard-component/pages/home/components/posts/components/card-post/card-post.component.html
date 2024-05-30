@@ -2,18 +2,18 @@
   <span *ngIf="loader | async"  class="loader"></span>
   <div *ngIf="(loader | async) === false">
     <mat-card class="post-card"  *ngFor="let post of posts | async" >
-      <mat-card-header [ngClass]="{'darkmode':darkMode | async}" >
+      <mat-card-header>
         <div class="post-header">
           <mat-card-title>{{post.authorName}}</mat-card-title>
           <mat-card-subtitle>
-            <span *ngIf="post.edit" [ngClass]="{'darkmode':darkMode | async}">Editado</span>
-            <span [ngClass]="{'darkmode':darkMode | async}">
+            <span *ngIf="post.edit" [ngClass]="{'darkmode':darkMode | async}" style="background: none;">Editado</span>
+            <span [ngClass]="{'darkmode':darkMode | async}" style="background: none;">
               {{post.createdAt | date:'short'}}
             </span>
           </mat-card-subtitle>
         </div>
       </mat-card-header>
-      <mat-card-content [ngClass]="{'darkmode':darkMode | async}" >
+      <mat-card-content  >
         <ng-container *ngIf="editingPost == post._id; else displayContent">
           <input type="text" [(ngModel)]="post.content" class="inputEdit">
         </ng-container>
@@ -21,13 +21,13 @@
           <p class="post-content">{{post.content}}</p>
         </ng-template>
       </mat-card-content>
-      <mat-card-actions class="mat-actions" [ngClass]="{'darkmode':darkMode | async}" >
+      <mat-card-actions class="mat-actions" >
         <div>
-          <button  *ngIf="!(userId == undefined)" mat-icon-button aria-label="Like" (click)="like(post._id)">
+          <button  *ngIf="!(userId == undefined)" mat-icon-button aria-label="Like" (click)="like(post._id)" >
             <mat-icon [ngClass]="{'liked': post.likes.includes(userId)}" >thumb_up</mat-icon>
           </button>
           <span>{{post.likes.length}}</span>
-          <button *ngIf="!(userId == undefined)" mat-icon-button aria-label="disLike" (click)="dislike(post._id)">
+          <button *ngIf="!(userId == undefined)" mat-icon-button aria-label="disLike"  (click)="dislike(post._id)">
             <mat-icon [ngClass]="{'disliked': post.dislikes.includes(userId)}">thumb_down</mat-icon>
           </button>
           <span>{{post.dislikes.length}}</span>

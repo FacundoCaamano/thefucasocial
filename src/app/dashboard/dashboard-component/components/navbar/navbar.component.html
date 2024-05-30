@@ -23,7 +23,7 @@
 </mat-toolbar>
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer  #drawer class="example-sidenav" mode="side">
-        <p (click)="drawer.toggle()" >x</p>
+        <button mat-raised-button color="primary" (click)="drawer.toggle()"> x </button>
         <app-list/>
     </mat-drawer>
 </mat-drawer-container>

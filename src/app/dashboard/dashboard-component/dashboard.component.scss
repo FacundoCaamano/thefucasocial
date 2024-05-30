@@ -4,6 +4,14 @@
     align-items: center;
     min-height: 80vh;
     div{
-        width: 60%;
+        width: 40%;
+    }
+}
+
+@media (max-width:1200px){
+    .menu{
+        div{
+            width: 90%;
+        }
     }
 }
