@@ -12,6 +12,9 @@
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
         <mat-icon>share</mat-icon>
     </button>
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="openDialog()">
+        <mat-icon>notifications</mat-icon>
+    </button>
     <div ngClass="nav-menu" *ngIf="width > 768px" class="app-list">
         <app-list/>
     </div>

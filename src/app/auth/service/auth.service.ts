@@ -14,10 +14,20 @@ export class AuthService {
   private _authUser$ = new BehaviorSubject<any>(null)
   public authUser$ = this._authUser$.asObservable()
 
+  public authUserId!:string
+
   constructor(
     private httpClient: HttpClient,
     private router: Router,
-  ) { }
+  ) { 
+    this.authUser$.subscribe(
+      data =>{
+        if(data){
+          this.authUserId = data._id
+        } 
+      }
+    )
+  }
 
   authUser() {
    return this.httpClient.get<any>(`${this.url}userauth`,{withCredentials:true}).subscribe(

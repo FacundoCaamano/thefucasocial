@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, mergeMap, take } from 'rxjs';
+import { AuthService } from 'src/app/auth/service/auth.service';
+import { SocketService } from 'src/app/core/service/socket.service';
 import { environment } from 'src/environments/environment.development';
 
 @Injectable({
@@ -19,8 +21,8 @@ export class FriendsService {
   private _friendsRequests$ = new BehaviorSubject<any>(null)
   public friendsRequests$ = this._friendsRequests$.asObservable()
 
-  constructor(private http: HttpClient) { 
-   
+  constructor(private http: HttpClient, private socketService:SocketService, private authservice:AuthService) { 
+    this.listenForFriendRequests();
   }
 
   getFriends(userId:string){
@@ -40,7 +42,15 @@ export class FriendsService {
   }
 
   sendFriendRequest(userId:string,friendId:string){ 
-    this.http.post(this.#url + 'sendfriendrequest' , {userId,friendId}).subscribe({})
+    this.http.post(this.#url + 'sendfriendrequest' , {userId,friendId},{withCredentials:true}).subscribe({
+      next: (data) => {
+        console.log('Solicitud de amistad enviada desde el cliente:', { userId, friendId });
+        this.socketService.emit('sendFriendRequest', { userId, friendId });
+      },
+      error: (error) => {
+        console.error('Error al enviar la solicitud de amistad:', error);
+      }
+    })
   }
 
   searchUsers(q:string,userId:string){
@@ -106,4 +116,12 @@ export class FriendsService {
     })
   }
 
+  private listenForFriendRequests(){
+     this.socketService.on('friendRequestReceived',(data)=>{
+       console.log('Solicitud de amistad recibida:', data);
+       this.getFriendsRequest(this.authservice.authUserId)
+     } )
+   
+    
+  }
 }

@@ -1,3 +1,5 @@
 export const environment = {
-    urlApi:'http://localhost:3000/thefucasocial/'
+    production:true,
+    urlApi:'http://localhost:3000/thefucasocial/',
+    socketUrl: 'http://localhost:3000'
 };

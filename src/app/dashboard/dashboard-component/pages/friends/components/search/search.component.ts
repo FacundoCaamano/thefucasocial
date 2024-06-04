@@ -48,6 +48,6 @@ export class SearchComponent implements OnDestroy {
   }
 
   isFriend(friendId:string){
-   return this.isMyFriend= this.myFriends.some(friend => friend._id == friendId)
+   return this.isMyFriend= this.myFriends?.some(friend => friend._id == friendId)
   }
 }

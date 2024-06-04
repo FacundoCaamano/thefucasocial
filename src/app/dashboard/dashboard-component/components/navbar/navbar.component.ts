@@ -1,8 +1,10 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/service/auth.service';
 import { ThemeService } from 'src/app/core/service/theme.service';
+import { NotifierComponent } from '../notifier/notifier.component';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +17,11 @@ export class NavbarComponent implements OnDestroy {
   name!:string
   subscription = new Subscription()
   isDarkModeOn!:any
-  constructor(private authService:AuthService, private themeService: ThemeService){
+  constructor(
+    private authService:AuthService, 
+    private themeService: ThemeService,
+    private dialog: MatDialog
+  ){
  
     this.subscription.add(
       this.authService.authUser$.subscribe(
@@ -28,6 +34,13 @@ export class NavbarComponent implements OnDestroy {
         data => { this.isDarkModeOn = data; }
       )
     );
+  }
+
+  openDialog(){
+    const dialogRef = this.dialog.open(NotifierComponent)
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
  
   ngOnDestroy(): void {
