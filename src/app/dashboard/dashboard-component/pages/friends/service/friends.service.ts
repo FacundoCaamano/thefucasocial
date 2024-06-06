@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, mergeMap, take } from 'rxjs';
 import { AuthService } from 'src/app/auth/service/auth.service';
+import { NotificationsService } from 'src/app/core/service/notifications.service';
 import { SocketService } from 'src/app/core/service/socket.service';
 import { environment } from 'src/environments/environment.development';
 
@@ -21,8 +22,13 @@ export class FriendsService {
   private _friendsRequests$ = new BehaviorSubject<any>(null)
   public friendsRequests$ = this._friendsRequests$.asObservable()
 
-  constructor(private http: HttpClient, private socketService:SocketService, private authservice:AuthService) { 
-    this.listenForFriendRequests();
+  constructor(
+    private http: HttpClient, 
+    private socketService:SocketService, 
+    private authservice:AuthService,
+    private notificationService:NotificationsService
+  ) { 
+   
   }
 
   getFriends(userId:string){
@@ -116,12 +122,14 @@ export class FriendsService {
     })
   }
 
-  private listenForFriendRequests(){
+  listenForFriendRequests(){
      this.socketService.on('friendRequestReceived',(data)=>{
-       console.log('Solicitud de amistad recibida:', data);
        this.getFriendsRequest(this.authservice.authUserId)
-     } )
-   
-    
+       try{
+        this.notificationService.setNotifications('nueva solicitud de amistad')
+       }catch(error){
+        console.error('Error al establecer la notificación:', error);
+       }
+     } ) 
   }
 }

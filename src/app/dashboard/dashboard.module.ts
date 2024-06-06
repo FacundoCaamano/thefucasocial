@@ -33,6 +33,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DialogFriendsOptionsComponent } from './dashboard-component/pages/friends/components/dialog-friends-options/dialog-friends-options.component'
 import {MatExpansionModule} from '@angular/material/expansion';
 import { NotifierComponent } from './dashboard-component/components/notifier/notifier.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatBadgeModule} from '@angular/material/badge';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -70,7 +72,9 @@ import { NotifierComponent } from './dashboard-component/components/notifier/not
     MatCheckboxModule,
     MatRippleModule,
     MatDialogModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatMenuModule,
+    MatBadgeModule
   ],
   exports:[
     DashboardComponent

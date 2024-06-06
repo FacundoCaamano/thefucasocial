@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from './auth/service/auth.service';
 import { SocketService } from './core/service/socket.service';
+import { FriendsService } from './dashboard/dashboard-component/pages/friends/service/friends.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,8 @@ export class AppComponent implements OnInit, OnDestroy  {
   userId!:string
   constructor(
     private authService:AuthService,
-    private socketService:SocketService
+    private socketService:SocketService,
+    private friendService:FriendsService
   ){
   }
   ngOnInit(): void {
@@ -24,6 +26,7 @@ export class AppComponent implements OnInit, OnDestroy  {
           
           
           this.socketService.connect(data._id);
+          this.friendService.listenForFriendRequests()
         }
       }
     )

@@ -5,6 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/service/auth.service';
 import { ThemeService } from 'src/app/core/service/theme.service';
 import { NotifierComponent } from '../notifier/notifier.component';
+import { NotificationsService } from 'src/app/core/service/notifications.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,10 +18,11 @@ export class NavbarComponent implements OnDestroy {
   name!:string
   subscription = new Subscription()
   isDarkModeOn!:any
+  newNotifications!:number
   constructor(
     private authService:AuthService, 
     private themeService: ThemeService,
-    private dialog: MatDialog
+    private notificationsService:NotificationsService
   ){
  
     this.subscription.add(
@@ -34,14 +36,16 @@ export class NavbarComponent implements OnDestroy {
         data => { this.isDarkModeOn = data; }
       )
     );
+    this.subscription.add( 
+      this.notificationsService.countNotifications$.subscribe(
+        data => this.newNotifications = data
+      )
+    )
   }
 
-  openDialog(){
-    const dialogRef = this.dialog.open(NotifierComponent)
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
+ butonsSendNotification(data:string){ 
+  this.notificationsService.setNotifications(data)
+ }
  
   ngOnDestroy(): void {
     this.subscription.unsubscribe()
@@ -52,5 +56,8 @@ export class NavbarComponent implements OnDestroy {
   }
   toggleTheme() {
     this.themeService.setDarkMode()
+  }
+  clearNotificationCount(){
+    this.notificationsService.clearCountNotifications()
   }
 }
