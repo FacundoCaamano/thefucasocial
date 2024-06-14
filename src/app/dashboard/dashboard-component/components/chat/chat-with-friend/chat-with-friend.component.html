@@ -1,0 +1,14 @@
+<div class="chatWithFriend">
+    <p>{{userChat.name}}</p>
+    <div #chatContent  class="chat-content">
+        <div *ngFor="let messages of chat | async">
+            <p [ngClass]="messages.userId == userId ? 'myMessage' : 'friendMessage'">
+                {{messages.message}}
+            </p>
+        </div>
+    </div>
+    <div class="inputChat">
+        <input type="text" [(ngModel)]="message" >
+        <button (click)="createMessage()" mat-button color="basic">send</button>
+    </div>
+</div>

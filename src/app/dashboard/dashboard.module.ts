@@ -35,6 +35,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { NotifierComponent } from './dashboard-component/components/notifier/notifier.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatBadgeModule} from '@angular/material/badge';
+import { ChatComponent } from './dashboard-component/components/chat/chat.component';
+import { ChatWithFriendComponent } from './dashboard-component/components/chat/chat-with-friend/chat-with-friend.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -56,6 +58,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     SearchComponent,
     DialogFriendsOptionsComponent,
     NotifierComponent,
+    ChatComponent,
+    ChatWithFriendComponent,
   ],
   imports: [
     CommonModule,

@@ -21,8 +21,6 @@ export class FriendsListComponent implements OnDestroy {
     this.subscription = this.authService.authUser$.subscribe(
       data => {
         if(data){
-          this.userId = data._id
-          this.friendsService.getFriends(this.userId)
           this.friendsList$ = this.friendsService.friends$
         }
       }

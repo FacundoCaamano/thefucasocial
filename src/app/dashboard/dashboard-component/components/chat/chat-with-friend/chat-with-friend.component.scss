@@ -1,0 +1,60 @@
+.chatWithFriend {
+    height: 40vh;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    width: 25vw;
+    padding: 10px;
+}
+
+.chat-content {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scroll-snap-align: end;
+    padding: 10px;
+}
+
+.inputChat {
+    box-sizing: border-box;
+    input {
+        border-radius: 7px;
+        border: none;
+        background-color: rgb(141, 95, 141);
+        width: 90%;
+        height: 30px;
+        color: white;
+    }
+}
+
+.myMessage {
+    word-wrap: break-word;
+    align-self: flex-start;
+    background-color: rgb(134, 106, 144);
+    max-width: 70%;
+    margin-right: auto;
+    padding: 5px;
+    border-radius: 10px;
+   
+}
+
+.friendMessage {
+    word-wrap: break-word;
+    background-color: rgb(95, 66, 105);
+    align-self: flex-end;
+    max-width: 70%;
+    margin-left: auto;
+    padding: 5px;
+    border-radius: 10px;
+   
+}
+
+@media screen and (max-width:1200px) {
+    .chatWithFriend {
+        height: 40vh;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        width: 60vw;
+        padding: 10px;
+    }
+}

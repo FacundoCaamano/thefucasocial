@@ -1,0 +1,31 @@
+<button mat-button class="btnchat" color="basic" (click)="setChatMode()">
+    <mat-icon>chat</mat-icon>
+</button>
+
+<div [ngClass]="navChatActive ? 'navChat' : 'navChatDesactivated'">
+    <button mat-button color="warn" (click)="setChatMode()">
+        <mat-icon>
+            close
+        </mat-icon>
+    </button>
+    <div class="chat" *ngIf="!userSelect">
+        <div *ngFor="let friend of myFriendsChat | async" class="chat--element" (click)="selectUser(friend)">
+            <mat-icon>
+                account_circle
+            </mat-icon>
+            <span >
+                {{friend.name}}
+            </span>
+        </div>
+    </div>
+    <div *ngIf="userSelect"class="chatFriend">
+        <button mat-button color="accent" (click)="clearSelectUser()">
+            <mat-icon>
+                arrow_back
+            </mat-icon>
+        </button>
+        <div >
+            <app-chat-with-friend [userChat]="userSelect" [friendId]="userSelect._id"/>
+        </div>
+    </div>
+</div>

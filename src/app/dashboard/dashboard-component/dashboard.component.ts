@@ -8,7 +8,7 @@ import { ThemeService } from 'src/app/core/service/theme.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-
+  showFiller = false;
   darkMode!: Observable<boolean>
   constructor(private themeService:ThemeService){
     this.darkMode = this.themeService.darkMode

@@ -15,6 +15,7 @@ export class AuthService {
   public authUser$ = this._authUser$.asObservable()
 
   public authUserId!:string
+  public authUserName!:string
 
   constructor(
     private httpClient: HttpClient,
@@ -24,6 +25,7 @@ export class AuthService {
       data =>{
         if(data){
           this.authUserId = data._id
+          this.authUserName = data.name
         } 
       }
     )

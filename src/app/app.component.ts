@@ -24,7 +24,7 @@ export class AppComponent implements OnInit, OnDestroy  {
         if(data){
           this.userId = data._id
           
-          
+          this.friendService.getFriends(this.userId)
           this.socketService.connect(data._id);
           this.friendService.listenForFriendRequests()
         }
