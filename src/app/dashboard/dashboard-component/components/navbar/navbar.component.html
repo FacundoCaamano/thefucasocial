@@ -10,7 +10,7 @@
         <mat-slide-toggle [checked]="isDarkModeOn"  color="primary" (click)="toggleTheme()"></mat-slide-toggle>
     </div>
     
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="copy()">
         <mat-icon>share</mat-icon>
     </button>
     <button  [matMenuTriggerFor]="menu" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="clearNotificationCount()">

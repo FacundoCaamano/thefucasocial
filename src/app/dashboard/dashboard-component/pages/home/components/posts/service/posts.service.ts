@@ -163,14 +163,57 @@ export class PostsService {
     )
   }
   createComment(content: string,post:string,author:string,authorName:string){
-    this.httpClient.post(this.url + 'create-comment',{content,post,author,authorName}).subscribe()
+    this.httpClient.post(this.url + 'create-comment',{content,post,author,authorName})
+    .pipe(
+      mergeMap((nuevoComentario)=> this._comments$.pipe(
+        take(1),
+        map((arrayactual)=> [nuevoComentario,...arrayactual])
+      ))
+    )
+    .subscribe({
+      next:(data)=>{
+        this._comments$.next(data)
+      }
+    })
   }
 
   likeComment(commentId:string,userLike:string){
-    this.httpClient.post(this.url + 'like-comment',{commentId,userLike}).subscribe()
+    this.httpClient.post(this.url + 'like-comment',{commentId,userLike})
+    .pipe(mergeMap((data)=>{
+       return this._comments$.pipe(
+        take(1),
+        map((comments)=> comments.map(c => c._id ==commentId ? data : c))
+      )
+    }))
+    .subscribe(
+      {
+        next: (updatedComments) => {
+          this._comments$.next(updatedComments);
+        },
+        error: (error) => {
+          console.log('Error', error);
+        }
+      }
+    )
   }
   dislikeComment(commentId:string,userDislike:string){
-    this.httpClient.post(this.url + 'dislike-comment',{commentId,userDislike}).subscribe()
+    this.httpClient.post(this.url + 'dislike-comment',{commentId,userDislike})
+    .pipe(
+      mergeMap((data)=> this._comments$.pipe(
+        take(1),
+        map((comments)=> {
+         return comments.map(comment => comment._id == commentId ? data : comment)
+        })
+      ))
+    )
+    .subscribe({
+      next: (updatedComments) => {
+        this._comments$.next(updatedComments);
+      },
+      error: (error) => {
+        console.log('Error disliking comment', error);
+      }
+    })
   }
 
   editPost(postId:string, userId:string,content:string){
@@ -198,6 +241,19 @@ export class PostsService {
       complete:()=>{
         console.log('edit completado');
         this.loaderService.setLoader(false)
+      }
+    })
+  }
+
+  deleteComment(commentId:string, userAuthorId:string){
+    this.httpClient.delete(this.url + 'delete-comment/' + commentId + '/' + userAuthorId)
+    .pipe(mergeMap(()=>this._comments$.pipe(
+      take(1),
+      map((comments)=> comments.filter( c => c._id !== commentId))
+    )))
+    .subscribe({
+      next:(data)=>{
+        this._comments$.next(data)
       }
     })
   }

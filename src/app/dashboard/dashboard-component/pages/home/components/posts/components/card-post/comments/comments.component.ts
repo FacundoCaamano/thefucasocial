@@ -37,4 +37,7 @@ export class CommentsComponent implements OnInit {
   dislikeComment(commentId:string){
     this.postService.dislikeComment(commentId, this.authorId)
   }
+  deleteMyComment(commentId:string){
+    this.postService.deleteComment(commentId,this.authorId)
+  }
 }

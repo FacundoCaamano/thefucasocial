@@ -38,6 +38,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import { ChatComponent } from './dashboard-component/components/chat/chat.component';
 import { ChatWithFriendComponent } from './dashboard-component/components/chat/chat-with-friend/chat-with-friend.component';
 import { CommentsComponent } from './dashboard-component/pages/home/components/posts/components/card-post/comments/comments.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -80,7 +82,8 @@ import { CommentsComponent } from './dashboard-component/pages/home/components/p
     MatDialogModule,
     MatExpansionModule,
     MatMenuModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatSnackBarModule
   ],
   exports:[
     DashboardComponent
