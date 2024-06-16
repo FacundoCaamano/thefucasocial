@@ -1,0 +1,30 @@
+.inputContainer{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    .inputComment{
+        background-color: var(--color1);
+        border-radius: 5px;
+        width: 60%;
+        color: white;
+        transition: ease all 1s;
+    }
+}
+.inputComment:hover{
+    transform: scale(1.05);
+}
+.comment{
+    border-bottom: 2px solid gray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &--content{
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        width: 80%;
+        &__elementComment{
+            overflow: hidden;
+        }
+    }
+}

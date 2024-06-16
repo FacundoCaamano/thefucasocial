@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" class="navbar--container">
     <div>
-        <button  *ngIf="width < 768px" (click)="drawer.toggle()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+        <button  *ngIf="width < 768px" (click)="drawer.toggle()" mat-icon-button class="example-icon">
             <mat-icon>menu</mat-icon>
         </button>
         <span>The-Fuca-Social</span>
@@ -14,7 +14,7 @@
         <mat-icon>share</mat-icon>
     </button>
     <button  [matMenuTriggerFor]="menu" mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="clearNotificationCount()">
-        <mat-icon matBadge={{newNotifications}} matBadgeColor="warn">notifications</mat-icon>
+        <mat-icon matBadge={{newNotifications}} matBadgeColor="warn" aria-hidden="false">notifications</mat-icon>
         <mat-menu #menu >
             <app-notifier />
         </mat-menu>

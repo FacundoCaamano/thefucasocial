@@ -37,6 +37,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatBadgeModule} from '@angular/material/badge';
 import { ChatComponent } from './dashboard-component/components/chat/chat.component';
 import { ChatWithFriendComponent } from './dashboard-component/components/chat/chat-with-friend/chat-with-friend.component';
+import { CommentsComponent } from './dashboard-component/pages/home/components/posts/components/card-post/comments/comments.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -60,6 +61,7 @@ import { ChatWithFriendComponent } from './dashboard-component/components/chat/c
     NotifierComponent,
     ChatComponent,
     ChatWithFriendComponent,
+    CommentsComponent,
   ],
   imports: [
     CommonModule,

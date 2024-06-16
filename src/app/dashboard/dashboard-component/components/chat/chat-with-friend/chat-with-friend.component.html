@@ -3,6 +3,9 @@
     <div #chatContent  class="chat-content">
         <div *ngFor="let messages of chat | async">
             <p [ngClass]="messages.userId == userId ? 'myMessage' : 'friendMessage'">
+                <mat-icon>
+                    account_circle
+                </mat-icon>
                 {{messages.message}}
             </p>
         </div>

@@ -4,7 +4,6 @@
   flex-direction: column;
   margin: 50px 0px;
 }
-
 .post-card {
   width: 600px;
   margin: 50px 0;
@@ -53,6 +52,9 @@
   color: red;
   /* Cambia el color a rojo cuando está disliked */
 }
+.icon--comment{
+  color: white;
+}
 
 .mat-actions {
   justify-content: space-between;
@@ -61,3 +63,11 @@
 .deleteIcon {
   color: red;
 }
+
+.section--comments {
+  overflow: hidden;
+  height: 200px;
+  overflow-y: scroll;
+  padding: 10px;
+}
+

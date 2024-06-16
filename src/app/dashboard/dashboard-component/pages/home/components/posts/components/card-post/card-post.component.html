@@ -31,13 +31,12 @@
             <mat-icon [ngClass]="{'disliked': post.dislikes.includes(userId)}">thumb_down</mat-icon>
           </button>
           <span>{{post.dislikes.length}}</span>
-          <button mat-icon-button aria-label="Comment">
-            <mat-icon>comment</mat-icon>
+          <button mat-icon-button  (click)="selectPostComment(post._id)">
+            <mat-icon class="icon--comment">comment</mat-icon>
           </button>
-          <span class="action-label">Comment</span>
         </div>
         <div>
-
+          
           <button *ngIf="post.authorId == userId" mat-button (click)="onDelete(post._id)">
             <mat-icon class="deleteIcon">delete</mat-icon>
           </button>
@@ -52,6 +51,9 @@
           </button>
         </div>
       </mat-card-actions>
+      <section *ngIf="selectPost == post._id"  [@toggleComments] class="section--comments">
+        <app-comments [postId]="post._id"/>
+      </section>
     </mat-card>
   </div>
 </div>

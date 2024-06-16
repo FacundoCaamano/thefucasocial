@@ -19,6 +19,8 @@ export class PostsService {
   private _posts$ = new BehaviorSubject<Post[]>([])
   public posts$ = this._posts$.asObservable()
 
+  private _comments$ = new BehaviorSubject<any[]>([])
+  public comments$ = this._comments$.asObservable()
 
 
   constructor(private httpClient: HttpClient, private loaderService:LoaderService) { }
@@ -149,6 +151,26 @@ export class PostsService {
         }
       }
     )
+  }
+
+  getComments(postId:string){
+    this.httpClient.get<any[]>(this.url + 'get-comments/' + postId).subscribe(
+      {
+        next:(data)=>{
+          this._comments$.next(data)
+        }
+      }
+    )
+  }
+  createComment(content: string,post:string,author:string,authorName:string){
+    this.httpClient.post(this.url + 'create-comment',{content,post,author,authorName}).subscribe()
+  }
+
+  likeComment(commentId:string,userLike:string){
+    this.httpClient.post(this.url + 'like-comment',{commentId,userLike}).subscribe()
+  }
+  dislikeComment(commentId:string,userDislike:string){
+    this.httpClient.post(this.url + 'dislike-comment',{commentId,userDislike}).subscribe()
   }
 
   editPost(postId:string, userId:string,content:string){
