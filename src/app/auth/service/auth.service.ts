@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.development';
 import { Router } from '@angular/router';
 import { BehaviorSubject,} from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
+
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
 export const environment = {
     production:false,
-    urlApi:'http://localhost:3000/thefucasocial/',
+    urlApi:import.meta.env['NG_APP_URL'],
     socketUrl: 'http://localhost:3000'
 };
