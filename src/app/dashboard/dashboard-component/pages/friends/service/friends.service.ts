@@ -32,7 +32,7 @@ export class FriendsService {
   }
 
   getFriends(userId:string){
-    this.http.get(this.#url + 'myfriends/' + userId).subscribe({
+    this.http.get(this.#url + 'myfriends/' + userId,{withCredentials:true}).subscribe({
       next:(data)=>{
         this._friends$.next(data)
       }
@@ -40,7 +40,7 @@ export class FriendsService {
   }
 
   getFriendsRequest(userId:string){
-    this.http.get(this.#url + 'friendsRequest/' + userId).subscribe({
+    this.http.get(this.#url + 'friendsRequest/' + userId,{withCredentials:true}).subscribe({
       next:(data)=>{
         this._friendsRequests$.next(data)
       }
@@ -69,7 +69,7 @@ export class FriendsService {
     })
   }
   acceptFriend(userId:string,friendId:string){
-    this.http.post(this.#url + 'acceptfriend',{userId,friendId})
+    this.http.post(this.#url + 'acceptfriend',{userId,friendId},{withCredentials:true})
     .pipe(mergeMap(()=> this._friendsRequests$.pipe(
       take(1),
       map((requests:Array<any>)=> {
@@ -93,7 +93,7 @@ export class FriendsService {
     })
   }
   rejectRequest(userId:string,friendId:string){
-    this.http.delete(this.#url + 'rejectfriend/' + userId + '/' + friendId)
+    this.http.delete(this.#url + 'rejectfriend/' + userId + '/' + friendId,{withCredentials:true})
     .pipe(mergeMap((requests)=>{
       return this._friendsRequests$.pipe(
         take(1),
@@ -114,7 +114,7 @@ export class FriendsService {
   }
 
   deleteFriend(userId:string, friendId:string){
-    this.http.delete(this.#url + 'friend-delete/' + userId + '/' + friendId)
+    this.http.delete(this.#url + 'friend-delete/' + userId + '/' + friendId,{withCredentials:true})
     .subscribe({
       next:(data)=>{
         this._friends$.next(data)

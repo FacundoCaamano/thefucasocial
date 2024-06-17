@@ -68,7 +68,7 @@ export class PostsService {
       )    
   }
   likePost(postId: string, userId: string) {
-    this.httpClient.post<Post>(this.url + 'like/' + postId + '/' + userId, {})
+    this.httpClient.post<Post>(this.url + 'like/' + postId + '/' + userId,{} ,{withCredentials:true})
     .pipe(
       mergeMap((updatedPost) => this._posts$.pipe(take(1),
          map(posts =>{
@@ -98,7 +98,7 @@ export class PostsService {
     })
   }
   dislikePost(postId: string, userId: string) {
-    this.httpClient.post<Post>(this.url + 'dislike/' + postId + '/' + userId, {})
+    this.httpClient.post<Post>(this.url + 'dislike/' + postId + '/' + userId, {},{withCredentials:true})
     .pipe(
       mergeMap((updatedPost) => this._posts$.pipe(take(1),
         map(posts =>{
@@ -144,7 +144,7 @@ export class PostsService {
   }
 
   getPostsById(id:string){
-    this.httpClient.get(this.url + 'postsbyid/' + id).subscribe(
+    this.httpClient.get(this.url + 'postsbyid/' + id,{withCredentials:true}).subscribe(
       {
         next:(data)=>{  
           this._posts$.next(data as Post[])
@@ -163,7 +163,7 @@ export class PostsService {
     )
   }
   createComment(content: string,post:string,author:string,authorName:string){
-    this.httpClient.post(this.url + 'create-comment',{content,post,author,authorName})
+    this.httpClient.post(this.url + 'create-comment',{content,post,author,authorName},{withCredentials:true})
     .pipe(
       mergeMap((nuevoComentario)=> this._comments$.pipe(
         take(1),
@@ -178,7 +178,7 @@ export class PostsService {
   }
 
   likeComment(commentId:string,userLike:string){
-    this.httpClient.post(this.url + 'like-comment',{commentId,userLike})
+    this.httpClient.post(this.url + 'like-comment',{commentId,userLike},{withCredentials:true})
     .pipe(mergeMap((data)=>{
        return this._comments$.pipe(
         take(1),
@@ -197,7 +197,7 @@ export class PostsService {
     )
   }
   dislikeComment(commentId:string,userDislike:string){
-    this.httpClient.post(this.url + 'dislike-comment',{commentId,userDislike})
+    this.httpClient.post(this.url + 'dislike-comment',{commentId,userDislike},{withCredentials:true})
     .pipe(
       mergeMap((data)=> this._comments$.pipe(
         take(1),
@@ -246,7 +246,7 @@ export class PostsService {
   }
 
   deleteComment(commentId:string, userAuthorId:string){
-    this.httpClient.delete(this.url + 'delete-comment/' + commentId + '/' + userAuthorId)
+    this.httpClient.delete(this.url + 'delete-comment/' + commentId + '/' + userAuthorId,{withCredentials:true})
     .pipe(mergeMap(()=>this._comments$.pipe(
       take(1),
       map((comments)=> comments.filter( c => c._id !== commentId))

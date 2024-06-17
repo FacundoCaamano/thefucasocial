@@ -31,7 +31,7 @@ export class ChatService {
   }
 
   getMessages(friendId: string) {  
-    this.http.get(this.#url + 'messages/' + this.authService.authUserId + '/' + friendId).subscribe(
+    this.http.get(this.#url + 'messages/' + this.authService.authUserId + '/' + friendId,{withCredentials:true}).subscribe(
       {
         next: (data: any) => {
           this._messages$.next(data);
@@ -46,8 +46,6 @@ export class ChatService {
 
     const newMessage = { userId, userName, message, friendId, timestamp: new Date() };
     this.socketService.emit('sendMessage', newMessage);
-
-    // Opcional: también puedes actualizar el estado localmente si deseas una respuesta inmediata en la UI
     this._messages$.pipe(
       take(1),
       map(arrayActual => [...arrayActual, newMessage])
