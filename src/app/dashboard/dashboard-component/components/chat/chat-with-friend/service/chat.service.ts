@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, mergeMap, take } from 'rxjs';
+import { BehaviorSubject, Subject, map, mergeMap, take } from 'rxjs';
 import { AuthService } from 'src/app/auth/service/auth.service';
 import { SocketService } from 'src/app/core/service/socket.service';
 import { environment } from 'src/environments/environment.development';
@@ -14,6 +14,9 @@ export class ChatService {
 
   private _messages$ = new BehaviorSubject<Array<any>>([]);
   public messages$ = this._messages$.asObservable();
+
+  private _loader$ = new BehaviorSubject<boolean>(false)
+  public loader$ = this._loader$.asObservable()
 
   constructor(
     private http: HttpClient,
@@ -31,10 +34,16 @@ export class ChatService {
   }
 
   getMessages(friendId: string) {  
+    this._loader$.next(true)
     this.http.get(this.#url + 'messages/' + this.authService.authUserId + '/' + friendId,{withCredentials:true}).subscribe(
       {
         next: (data: any) => {
-          this._messages$.next(data);
+            this._messages$.next(data);          
+            this._loader$.next(false) 
+        },
+        error:(err)=>{
+          console.log(err);  
+          this._loader$.next(false)
         }
       }
     );
@@ -52,5 +61,9 @@ export class ChatService {
     ).subscribe(messages => {
       this._messages$.next(messages);
     });
+  }
+
+  clearChat(){
+    this._messages$.next([])
   }
 }

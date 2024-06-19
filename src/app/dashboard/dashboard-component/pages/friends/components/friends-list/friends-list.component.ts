@@ -3,7 +3,6 @@ import { FriendsService } from '../../service/friends.service';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/service/auth.service';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogFriendsOptionsComponent } from '../dialog-friends-options/dialog-friends-options.component';
 
 @Component({
   selector: 'app-friends-list',
@@ -25,10 +24,11 @@ export class FriendsListComponent implements OnDestroy {
         }
       }
     )
+    this.userId = this.authService.authUserId
   } 
 
-  openDialog(){
-    const dialogRef = this.matDialog.open(DialogFriendsOptionsComponent)
+  sendMessage(friend:any){
+    this.friendsService.selectFriend(friend)
   }
 
   ngOnDestroy(): void {

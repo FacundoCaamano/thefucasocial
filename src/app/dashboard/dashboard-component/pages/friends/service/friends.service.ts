@@ -22,6 +22,9 @@ export class FriendsService {
   private _friendsRequests$ = new BehaviorSubject<any>(null)
   public friendsRequests$ = this._friendsRequests$.asObservable()
 
+  private _selectFriend$  = new BehaviorSubject<any>(null)
+  public selectFriend$ = this._selectFriend$.asObservable()
+
   constructor(
     private http: HttpClient, 
     private socketService:SocketService, 
@@ -117,10 +120,16 @@ export class FriendsService {
     this.http.delete(this.#url + 'friend-delete/' + userId + '/' + friendId,{withCredentials:true})
     .subscribe({
       next:(data)=>{
-        this._friends$.next(data)
+        console.log(data);
+        
       }
     })
   }
+
+  selectFriend(friend:any){
+    this._selectFriend$.next(friend)
+    
+  } 
 
   listenForFriendRequests(){
      this.socketService.on('friendRequestReceived',(data)=>{

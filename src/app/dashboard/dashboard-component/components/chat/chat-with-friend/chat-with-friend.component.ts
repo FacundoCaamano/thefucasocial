@@ -21,6 +21,8 @@ export class ChatWithFriendComponent implements OnInit, AfterViewInit, AfterView
   userId!: string;
   message: string = '';
 
+  loader:Observable<boolean>
+
   constructor(
     private chatService: ChatService, 
     private authService: AuthService,
@@ -28,6 +30,7 @@ export class ChatWithFriendComponent implements OnInit, AfterViewInit, AfterView
   ) {
     this.chat = this.chatService.messages$;
     this.userId = this.authService.authUserId;
+    this.loader = this.chatService.loader$
   }
 
   ngAfterViewInit(): void {
@@ -47,6 +50,7 @@ export class ChatWithFriendComponent implements OnInit, AfterViewInit, AfterView
   }
 
   ngOnDestroy(): void {
+    this.chatService.clearChat()
     if (this.chatSubscription) {
       this.chatSubscription.unsubscribe();
     }

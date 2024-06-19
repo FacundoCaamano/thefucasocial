@@ -22,6 +22,9 @@ export class PostsService {
   private _comments$ = new BehaviorSubject<any[]>([])
   public comments$ = this._comments$.asObservable()
 
+  private _loader$ = new BehaviorSubject<boolean>(false)
+  public loader$ = this._loader$.asObservable()
+
 
   constructor(private httpClient: HttpClient, private loaderService:LoaderService) { }
 
@@ -154,10 +157,19 @@ export class PostsService {
   }
 
   getComments(postId:string){
+    this._loader$.next(true)
     this.httpClient.get<any[]>(this.url + 'get-comments/' + postId).subscribe(
       {
         next:(data)=>{
           this._comments$.next(data)
+          this._loader$.next(false)
+        },
+        error:(err)=>{
+          console.log(err);
+          this._loader$.next(false)
+        },
+        complete:()=>{
+          this._loader$.next(false)
         }
       }
     )

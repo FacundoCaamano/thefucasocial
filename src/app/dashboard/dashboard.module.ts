@@ -30,7 +30,6 @@ import { SearchComponent } from './dashboard-component/pages/friends/components/
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRippleModule} from '@angular/material/core';
 import {MatDialogModule} from '@angular/material/dialog';
-import { DialogFriendsOptionsComponent } from './dashboard-component/pages/friends/components/dialog-friends-options/dialog-friends-options.component'
 import {MatExpansionModule} from '@angular/material/expansion';
 import { NotifierComponent } from './dashboard-component/components/notifier/notifier.component';
 import {MatMenuModule} from '@angular/material/menu';
@@ -59,7 +58,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     FriendsRequestComponent,
     NavbarFriendsComponent,
     SearchComponent,
-    DialogFriendsOptionsComponent,
     NotifierComponent,
     ChatComponent,
     ChatWithFriendComponent,

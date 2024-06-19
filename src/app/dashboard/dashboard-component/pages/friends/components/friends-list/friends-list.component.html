@@ -24,20 +24,11 @@
                   
                   </mat-expansion-panel-header>
                   <div class="panel-content">
-                    <p>Enviar mensaje</p>
+                    <p (click)="sendMessage(friends)">Enviar mensaje</p>
                     <p (click)="onDeleteFriend(friends._id)">Eliminar amigo</p>
                   </div>
                 </mat-expansion-panel>
               </mat-accordion>
-            <!-- <div matRipple [matRippleUnbounded]="unboded" [matRippleCentered]="center">
-                <button mat-button color="accent" (click)="openDialog()">
-                    <mat-icon>
-                        tune
-                    </mat-icon>
-                </button>
-            </div> -->
-
-
         </mat-card-actions>
     </mat-card>
 

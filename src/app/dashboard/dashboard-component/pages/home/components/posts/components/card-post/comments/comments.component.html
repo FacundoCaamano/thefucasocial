@@ -2,28 +2,31 @@
     <input type="text" class="inputComment" [(ngModel)]="inputCommentValue">
     <button (click)="sendComment()"  mat-raised-button color="primary">send</button>
 </div>
-<div  *ngFor="let comment of comments | async">
-    <div class="comment">
-        <div class="comment--content">
-            <span class="comment--content__elementName">
-                {{comment.authorName}}
-            </span>
-            <p class="comment--content__elementComment">
-                {{comment.content}}
-            </p>
-        </div>
-        <div class="comment--actions">
-            <button *ngIf="comment.author == authorId" mat-icon-button color="warn" (click)="deleteMyComment(comment._id)">
-                <mat-icon>
-                    delete
-                </mat-icon>
-            </button>
-            <button  mat-icon-button aria-label="Like" (click)="likeComment(comment._id)" matBadge={{comment.likes.length}}>
-                <mat-icon >thumb_up</mat-icon>
-            </button>  
-            <button mat-icon-button aria-label="disLike"  (click)="dislikeComment(comment._id)" matBadge={{comment.dislikes.length}}>
-                <mat-icon >thumb_down</mat-icon>
-            </button>
+<span *ngIf="loader | async"  class="loader"></span>
+<div *ngIf="(comments | async) && (loader | async) == false">
+    <div  *ngFor="let comment of comments | async">
+        <div class="comment">
+            <div class="comment--content">
+                <span class="comment--content__elementName">
+                    {{comment.authorName}}
+                </span>
+                <p class="comment--content__elementComment">
+                    {{comment.content}}
+                </p>
+            </div>
+            <div class="comment--actions">
+                <button *ngIf="comment.author == authorId" mat-icon-button color="warn" (click)="deleteMyComment(comment._id)">
+                    <mat-icon>
+                        delete
+                    </mat-icon>
+                </button>
+                <button  mat-icon-button aria-label="Like" (click)="likeComment(comment._id)" matBadge={{comment.likes.length}}>
+                    <mat-icon >thumb_up</mat-icon>
+                </button>  
+                <button mat-icon-button aria-label="disLike"  (click)="dislikeComment(comment._id)" matBadge={{comment.dislikes.length}}>
+                    <mat-icon >thumb_down</mat-icon>
+                </button>
+            </div>
         </div>
     </div>
 </div>

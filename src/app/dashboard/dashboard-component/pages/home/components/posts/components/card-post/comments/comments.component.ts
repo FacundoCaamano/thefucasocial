@@ -10,34 +10,36 @@ import { AuthService } from 'src/app/auth/service/auth.service';
 })
 export class CommentsComponent implements OnInit {
 
-  @Input() postId!:string
+  @Input() postId!: string
 
   comments!: Observable<any[]>
-  inputCommentValue:string = ''
+  inputCommentValue: string = ''
 
-  authorName:string
-  authorId:string
-  constructor(private postService:PostsService,private authService:AuthService){
-    this.authorName=this.authService.authUserName,
-    this.authorId = this.authService.authUserId
+  loader!: Observable<boolean>
+
+  authorName: string
+  authorId: string
+  constructor(private postService: PostsService, private authService: AuthService) {
+    this.authorName = this.authService.authUserName,
+      this.authorId = this.authService.authUserId
   }
   ngOnInit(): void {
+    this.loader = this.postService.loader$
     this.postService.getComments(this.postId)
-
     this.comments = this.postService.comments$
   }
-  sendComment(){
-    this.postService.createComment(this.inputCommentValue,this.postId,this.authorId,this.authorName)
+  sendComment() {
+    this.postService.createComment(this.inputCommentValue, this.postId, this.authorId, this.authorName)
     this.inputCommentValue = ''
   }
 
-  likeComment(commentId:string){
+  likeComment(commentId: string) {
     this.postService.likeComment(commentId, this.authorId)
   }
-  dislikeComment(commentId:string){
+  dislikeComment(commentId: string) {
     this.postService.dislikeComment(commentId, this.authorId)
   }
-  deleteMyComment(commentId:string){
-    this.postService.deleteComment(commentId,this.authorId)
+  deleteMyComment(commentId: string) {
+    this.postService.deleteComment(commentId, this.authorId)
   }
 }
