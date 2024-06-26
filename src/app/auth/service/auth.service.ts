@@ -21,6 +21,7 @@ export class AuthService {
     private httpClient: HttpClient,
     private router: Router,
   ) { 
+    this.authUser()
     this.authUser$.subscribe(
       data =>{
         if(data){
