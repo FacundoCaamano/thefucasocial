@@ -21,7 +21,7 @@ export class AuthService {
     private httpClient: HttpClient,
     private router: Router,
   ) { 
-    this.authUser()
+  
     this.authUser$.subscribe(
       data =>{
         if(data){
@@ -33,15 +33,17 @@ export class AuthService {
   }
 
   authUser() {
-   return this.httpClient.get<any>(`${this.url}userauth`,{withCredentials:true}).subscribe(
+  this.httpClient.get<any>(`${this.url}userauth`,{withCredentials:true}).subscribe(
       {
         next:(data)=>{
           this._authUser$.next(data?.usuario)  
-          this.router.navigate(['dashboard/home'])        
         },
         error:()=>{
           console.log('no identificado');
           
+        },
+        complete:()=>{
+          this.router.navigate(['dashboard/home'])        
         }
       }
     )
