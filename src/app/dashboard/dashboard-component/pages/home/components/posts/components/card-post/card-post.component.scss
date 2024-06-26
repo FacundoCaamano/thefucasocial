@@ -71,3 +71,8 @@
   padding: 10px;
 }
 
+@media screen and (max-width:900px) {
+  .post-card{
+    width: 90vw;
+  }
+}
