@@ -18,7 +18,10 @@ export class AppComponent implements OnInit, OnDestroy  {
   ){
   }
   ngOnInit(): void {
-    this.authService.authUser()
+    setTimeout(()=>{
+
+      this.authService.authUser()
+    },1000)
     this.authService.authUser$.subscribe(
       data => {
         if(data){

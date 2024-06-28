@@ -36,7 +36,7 @@ export class AuthService {
   this.httpClient.get<any>(`${this.url}userauth`,{withCredentials:true}).subscribe(
       {
         next:(data)=>{
-          this._authUser$.next(data?.usuario)  
+          this._authUser$.next(data)      
         },
         error:()=>{
           console.log('no identificado');
@@ -53,7 +53,6 @@ export class AuthService {
       {
         next: (data:any) => {
           this._authUser$.next(data);
-        
           this.router.navigate(['dashboard/home'])
 
         }
