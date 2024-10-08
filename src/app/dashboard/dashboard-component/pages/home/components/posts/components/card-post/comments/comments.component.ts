@@ -17,8 +17,8 @@ export class CommentsComponent implements OnInit {
 
   loader!: Observable<boolean>
 
-  authorName: string
-  authorId: string
+  authorName: string | null
+  authorId: string | null
   constructor(private postService: PostsService, private authService: AuthService) {
     this.authorName = this.authService.authUserName,
       this.authorId = this.authService.authUserId
@@ -29,17 +29,17 @@ export class CommentsComponent implements OnInit {
     this.comments = this.postService.comments$
   }
   sendComment() {
-    this.postService.createComment(this.inputCommentValue, this.postId, this.authorId, this.authorName)
+    this.postService.createComment(this.inputCommentValue, this.postId, this.authorId as string, this.authorName as string)
     this.inputCommentValue = ''
   }
 
   likeComment(commentId: string) {
-    this.postService.likeComment(commentId, this.authorId)
+    this.postService.likeComment(commentId, this.authorId as string)
   }
   dislikeComment(commentId: string) {
-    this.postService.dislikeComment(commentId, this.authorId)
+    this.postService.dislikeComment(commentId, this.authorId as string)
   }
   deleteMyComment(commentId: string) {
-    this.postService.deleteComment(commentId, this.authorId)
+    this.postService.deleteComment(commentId, this.authorId as string)
   }
 }

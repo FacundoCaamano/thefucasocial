@@ -14,8 +14,8 @@ export class AuthService {
   private _authUser$ = new BehaviorSubject<any>(null)
   public authUser$ = this._authUser$.asObservable()
 
-  public authUserId!:string
-  public authUserName!:string
+  public authUserId!:string | null
+  public authUserName!:string | null
 
   constructor(
     private httpClient: HttpClient,
@@ -76,6 +76,8 @@ export class AuthService {
     this.httpClient.get(this.url + 'logout',{withCredentials:true}).subscribe({
       complete:()=>{
         this._authUser$.next(null);
+        this.authUserId = null
+        this.authUserName = null
         this.router.navigate(['auth/login']);  
       }
     })

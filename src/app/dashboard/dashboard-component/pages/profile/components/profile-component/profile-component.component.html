@@ -1,5 +1,5 @@
 
-<div class="card-profile">
+<div class="card-profile" *ngIf="(userdata | async)">
     <div class="card-profile--header">
         <h3>
             {{ (userdata | async)?.name }}
@@ -11,6 +11,12 @@
     </div>
     <div class="card-profile--footer">
         <button  mat-raised-button color="warn" (click)="logout()">Cerrar sesion</button>
+    </div>
+</div>
+<div *ngIf="!(userdata | async)">
+    <div class="buttonsSesion">
+        <button  mat-raised-button color="warn" routerLink="/auth/login">Iniciar sesion </button>
+        <button  mat-raised-button color="warn" routerLink="/auth/register">Crear cuenta </button>
     </div>
 </div>
 

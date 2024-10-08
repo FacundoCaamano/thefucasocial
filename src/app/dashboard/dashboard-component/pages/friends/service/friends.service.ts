@@ -133,7 +133,7 @@ export class FriendsService {
 
   listenForFriendRequests(){
      this.socketService.on('friendRequestReceived',(data)=>{
-       this.getFriendsRequest(this.authservice.authUserId)
+       this.getFriendsRequest(this.authservice.authUserId as string)
        try{
         this.notificationService.setNotifications('nueva solicitud de amistad')
        }catch(error){

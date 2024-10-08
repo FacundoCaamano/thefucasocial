@@ -29,7 +29,7 @@ export class ChatWithFriendComponent implements OnInit, AfterViewInit, AfterView
     private socketService:SocketService
   ) {
     this.chat = this.chatService.messages$;
-    this.userId = this.authService.authUserId;
+    this.userId = this.authService.authUserId as string;
     this.loader = this.chatService.loader$
   }
 

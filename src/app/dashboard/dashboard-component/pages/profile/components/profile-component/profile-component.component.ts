@@ -24,8 +24,8 @@ export class ProfileComponentComponent {
     this.authUserSuscription=this.authService.authUser$.subscribe(
       data => {
         if(data){
-          this.userId=data._id}
-          this.postService.getPostsById(data._id)
+          this.userId=data?._id}
+          this.postService.getPostsById(data?._id)
         } 
     )
     
@@ -39,6 +39,7 @@ export class ProfileComponentComponent {
   }
 
   logout(){
+    this.authUserSuscription.unsubscribe()
    this.authService.logout()
   }
 

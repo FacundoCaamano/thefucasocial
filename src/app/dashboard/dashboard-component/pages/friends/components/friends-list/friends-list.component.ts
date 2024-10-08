@@ -24,7 +24,7 @@ export class FriendsListComponent implements OnDestroy {
         }
       }
     )
-    this.userId = this.authService.authUserId
+    this.userId = this.authService.authUserId as string
   } 
 
   sendMessage(friend:any){

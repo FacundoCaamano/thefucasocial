@@ -16,6 +16,9 @@
           <mat-error *ngIf="passControl.invalid">
             Contraseña invalida
           </mat-error>
-          <button mat-raised-button color="accent" (click)="login()">Login</button>
+          <div class="buttonsContainer">
+            <button mat-raised-button color="accent" (click)="login()">Login</button>
+            <button mat-raised-button routerLink="/dashboard/home">Continuar sin cuenta</button>
+          </div>
         </form>
       </div>
