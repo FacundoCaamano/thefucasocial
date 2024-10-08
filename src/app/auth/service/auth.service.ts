@@ -74,11 +74,21 @@ export class AuthService {
   
   logout() {
     this.httpClient.get(this.url + 'logout',{withCredentials:true}).subscribe({
-      complete:()=>{
+      next:()=>{
         this._authUser$.next(null);
         this.authUserId = null
         this.authUserName = null
+        console.log('eliminado');
+        
         this.router.navigate(['auth/login']);  
+      },
+      error:()=>{
+        console.log('error');
+        
+      },
+      complete:()=>{
+        console.log('completado');
+        
       }
     })
   }
